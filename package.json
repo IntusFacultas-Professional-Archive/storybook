@@ -1,11 +1,16 @@
 {
   "name": "@intusfacultas/component-library",
   "version": "1.0.0",
+  "repository": {
+    "type": "git",
+    "url": "ssh://git@github.com/IntusFacultas/NPM_REPO",
+    "directory": "packages/component-library"
+  },
   "scripts": {
     "build": "sh scripts/build.sh",
     "test:unit": "vue-cli-service test:unit",
     "lint": "vue-cli-service lint",
-    "build-storybook": "build-storybook",
+    "build-storybook": "build-storybook -c .storybook -o .out",
     "build:component": "cross-env NODE_ENV=production rollup --config \"scripts/rollup.component.config.js\"",
     "build:index": "cross-env NODE_ENV=production rollup --config \"scripts/rollup.index.config.js\"",
     "build:index:esm": "cross-env NODE_ENV=production rollup --config \"scripts/rollup.index.esm.config.js\"",
