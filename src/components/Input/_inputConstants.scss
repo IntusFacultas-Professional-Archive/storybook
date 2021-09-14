@@ -1,0 +1,284 @@
+@use '../Text/_textConstants' as text;
+@use '../_constants.scss' as constants;
+@use '../_stacking.scss' as stacking;
+@use '../_colors.scss' as colors;
+
+$InputHeight: 41px;
+
+$InputHorizontalPadding: 1em;
+$InputSvgSize: 20px;
+$LabelTranslateDistance: 1.25em;
+$InputVerticalPadding: .5em;
+
+
+@mixin DisabledInputStyling {
+  opacity: constants.$DisabledOpacity;
+  @include colors.themed() {
+    border-color: colors.retrieveColor('text-disabled') !important;
+  }
+}
+
+
+@mixin DefaultInputBorder {
+  border-style: constants.$DefaultBorderStyle;
+  z-index: stacking.$InputZIndex;
+  transition: border-color constants.$DefaultTiming ease-out;
+  pointer-events: none;
+  display: inline-block;
+}
+
+
+@mixin FocusOrFilledInputLabel {
+  transform: translate(2px, -$LabelTranslateDistance) scale(.8) !important;
+}
+
+@mixin FieldVariants($selector) {
+  &--default {
+    @include colors.themed() {
+      border-color: colors.retrieveColor('text-normal');
+    }
+    & label {
+      @include colors.themed() {
+        color: colors.retrieveColor('text-normal');
+      }
+    }
+    & svg {
+      @include colors.themed() {
+        fill: colors.retrieveColor('text-normal');
+        stroke: colors.retrieveColor('text-normal');
+      }
+    }
+  }
+  &--success {
+    @include colors.themed() {
+      border-color: colors.retrieveColor('input-success');
+    }
+    & label {
+      @include colors.themed() {
+        color: colors.retrieveColor('success');
+      }
+    }
+    & svg {
+      @include colors.themed() {
+        fill: colors.retrieveColor('success');
+        stroke: colors.retrieveColor('success');
+      }
+    }
+  }
+  &--error {
+    @include colors.themed() {
+      border-color: colors.retrieveColor('input-danger');
+    }
+    & label {
+      @include colors.themed() {
+        color: colors.retrieveColor('danger');
+      }
+    }
+    & svg {
+      @include colors.themed() {
+        fill: colors.retrieveColor('danger');
+        stroke: colors.retrieveColor('danger');
+      }
+    }
+  }
+  &--focus {
+    @include colors.themed() {
+      border-color: colors.retrieveColor('input-focus');
+    }
+    & label {
+      @include colors.themed() {
+        color: colors.retrieveColor('primary');
+      }
+      @include FocusOrFilledInputLabel;
+    }
+  }
+}
+
+@mixin FloatedBorders($selector) {
+  &--left {
+    @include DefaultInputBorder;
+    border-left-width: constants.$DefaultBorderWidth;
+    border-top-width: constants.$DefaultBorderWidth;
+    border-right-width: 0px;
+    border-bottom-width: constants.$DefaultBorderWidth;
+    width: $InputHorizontalPadding;
+  }
+  &--right {
+    @include DefaultInputBorder;
+    border-right-width: constants.$DefaultBorderWidth;
+    border-top-width: constants.$DefaultBorderWidth;
+    border-left-width: 0px;
+    border-bottom-width: constants.$DefaultBorderWidth;
+    flex: 1;
+  }
+  &--label {
+    @include DefaultInputBorder;
+    display: flex;
+    justify-content: center;
+    border-left-width: 0px;
+    max-width: calc(100% - #{$InputHorizontalPadding});
+    border-right-width: 0px;
+    border-bottom-width: constants.$DefaultBorderWidth;
+    border-top-width: 2px;
+    padding-top: $InputVerticalPadding;
+    align-items: flex-start;
+    &--focusOrFilled {
+      border-top-width: 0px;
+      & label {
+        @include FocusOrFilledInputLabel;
+      }
+    }
+    & label {
+      @include text.DefaultTextStyling;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow-x: hidden;
+      overflow-y: show;
+      transition: transform .1s ease-out;
+      transform: translate(0) scale(1);
+      transform-origin: center left;
+      font-weight: 600;
+      @include colors.themed() {
+        color: colors.retrieveColor('text-normal');
+      }
+    }
+  }
+}
+
+
+// These 5 mixins style the various logistical containers of floated label components
+
+@mixin InputEndcapContainer {
+  &__endcapAndInputContainer {
+    display: flex;
+    flex-wrap: nowrap;
+    width: 100%;
+    @content;
+  }
+}
+
+@mixin InputSVGContainer {
+  &__svgContainer {
+    position: absolute;
+    right: 0;
+    height: $InputHeight;
+    top: 0;
+    display: flex;
+    align-items: center;
+    pointer-events: none;
+    justify-content: center;
+    padding: 0 .75em;
+    width: $InputHorizontalPadding;
+
+    @content;
+    & svg {
+      height: $InputSvgSize;
+      width: $InputSvgSize;
+    }
+
+    // state based variants. Should match border state based variants
+    @include FieldVariants(&);
+  }
+}
+
+@mixin FormContainer {
+  &__formContainer {
+    position: relative;
+    flex: 1;
+    max-width: 100%;
+  }
+}
+
+@mixin InputEndcap {
+  &__endcapContainer {
+    flex-shrink: 1;
+    @content;
+  }
+}
+
+@mixin LabelContainer {
+  &__labelContainer {
+    height: $InputHeight;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    box-sizing: border-box;
+    display: flex;
+    pointer-events: none;
+    @content;
+  }
+}
+
+/**
+* This styles the floated borders, and provides the variants
+*/
+@mixin FloatedInputBorder {
+  &__border {
+    @include FloatedBorders(&);
+
+    @include FieldVariants(&);
+
+    // focus or disabled variants
+    
+    &--disabled {
+      opacity: constants.$DisabledOpacity;
+      @include colors.themed() {
+        border-color: colors.retrieveColor('text-disabled') !important;
+      }
+      & label {
+        @include colors.themed() {
+          color: colors.retrieveColor('text-disabled');
+        }
+      }
+    }
+  }
+}
+
+
+/**
+* This styles the actual input/textarea element
+*/
+@mixin FloatedLabelInput {
+  @include text.DefaultTextStyling;
+  height: $InputHeight;
+  width: 100%;
+  box-sizing: border-box;
+  background-color: transparent !important;
+  padding: $InputVerticalPadding 2em $InputVerticalPadding $InputHorizontalPadding;
+  border-width: 0px;
+  &:disabled {
+    pointer-events: none;
+    opacity: constants.$DisabledOpacity;
+  }
+  &:focus {
+    outline: 0;
+  }
+  &::placeholder {
+    opacity: 0;
+  }
+  &:focus {
+    &::placeholder {
+      opacity: 1;
+    }
+  }
+  &:-webkit-autofill,
+  &:-webkit-autofill:hover,
+  &:-webkit-autofill:focus {
+    background-color: transparent !important;
+    appearance: initial !important;
+    border-color: transparent !important;
+    border-width: 0px !important;
+    border-style: none !important;
+  }
+  @include colors.themed() {
+    color: colors.retrieveColor('text-normal');
+  }
+  &:disabled {
+    @include colors.themed() {
+      color: colors.retrieveColor('text-disabled');
+      background-color: colors.retrieveColor('input-disabled') !important;
+    }
+  }
+}

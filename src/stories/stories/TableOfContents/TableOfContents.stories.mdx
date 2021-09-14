@@ -1,0 +1,43 @@
+import { Meta, ArgsTable } from '@storybook/addon-docs/blocks';
+// import {Title} from '@storybook/addon-docs';
+import {IFCModal} from '@Components/Modal/IFCModal'
+
+<Meta title="Container Components/Table of Contents/Usage" />
+
+# IFC Table of Contents
+
+This documentation explains how you can use the TOC plugin to update the TOC when data changes
+
+## Using the IFCTableOfContentsPlugin
+
+While the TOC is capable of observing for changes in the DOM using a MutationObserver, that approach is very resource
+expensive and can slow down your page if you're updating the DOM frequently. So instead, you can manually trigger
+a refresh when you know a meaningful DOM change has just occured by using the plugin.
+
+```html
+<template>
+  <IFCThemeProvider>
+    <IFCTableOfContents />
+  </IFCThemeProvider>
+</template>
+
+<script>
+import { IFCThemeProvider, IFCTableOfContentsPlugin, IFCTableOfContents } from '@nasic/component-library/build/index.esm';
+import Vue from 'vue';
+
+Vue.use(IFCTableOfContentsPlugin);
+
+export default {
+  components: {
+    IFCTableOfContents,
+    IFCThemeProvider,
+  },
+  methods: {
+    refreshToC() {
+      this.$IFCTOCRefresh();
+    }
+  }
+};
+
+</script>
+```

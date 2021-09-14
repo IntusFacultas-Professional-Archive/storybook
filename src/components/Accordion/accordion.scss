@@ -1,0 +1,21 @@
+@use '../_constants' as constants;
+@use '../_colors' as colors;
+.IFCAccordion {
+  &__container {
+    position: relative;
+    transition: height constants.$DefaultTiming ease-out;
+    box-sizing: border-box;
+  }
+  &__titleArea {
+    border-bottom: 1px solid transparent;
+    &--underlined {
+      @include colors.themed() {
+        border-bottom: 1px solid colors.retrieveColor('accordion-underline');
+      }
+    }
+  }
+  &__expander {
+    transition: height constants.$DefaultTiming ease-out;
+    box-sizing: border-box;
+  }
+}

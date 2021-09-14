@@ -1,0 +1,107 @@
+import { Meta, ArgsTable } from '@storybook/addon-docs/blocks';
+// import {Title} from '@storybook/addon-docs';
+import {IFCAlert} from '@Components/Alert/IFCAlert'
+
+<Meta title="Presentational Components/Alert/Usage" />
+
+# IFC Alert
+
+This documentation explains how you can toggle the alert
+
+
+## Using the alert
+
+The alert needs to be included in one place and then plugged into vue using the `IFCAlertPlugin`
+
+
+## Using the IFCAlertPlugin
+
+You need to use the IFCAlertPlugin, which binds a method to all your vue components called `$IFCAlert` and accepts
+one arguments: An alert configuration.
+```html
+<template>
+  <IFCThemeProvider>
+    <IFCAlert />
+  </IFCThemeProvider>
+</template>
+
+<script>
+import { IFCAlertPlugin, IFCAlert, IFCThemeProvider } from '@nasic/component-library/build/index.esm';
+import Vue from 'vue';
+
+Vue.use(IFCAlertPlugin);
+
+export default {
+  components: { IFCAlert, IFCThemeProvider },
+  mounted() {
+    this.$IFCAlert({
+
+      // the id for this alert. Not necessary unless you want to manually cancel the alert.
+      id: 'asdf',
+
+      variant: 'success', // options are success, default, danger, info, warning
+
+      // the title of the alert
+      title: 'Alert Title',
+
+      // the amount of time in milliseconds before this alert autocloses. (truncated to whole second)
+      // consider how long a screen reader will need to detect and read your alert before setting this!
+      // autoclose: 5000,
+
+      // Whether to allow background dismissing
+      backgroundDismiss: false,
+
+      // HTML to be displayed raw
+      html: '',
+
+      // Content to display as a paragraphs. Can also be an Array of Strings.
+      content: 'Alert content',
+
+      // fields to be displayed. Will be passed back to your button callbacks in an object keyed by field name with
+      // field value
+      fields: [
+
+        // must match this format. type can only be `text` or `number`
+        {
+          type: 'text',
+          label: 'Text Input',
+          value: 'Initial Value',
+          name: 'textValue',
+        },
+        {
+          type: 'number',
+          label: 'Number Input',
+          value: 1,
+          name: 'numberValue',
+        },
+      ],
+
+      // You can replace the default button with your own buttons.
+      // variant must match a variant for IFCButto
+      // content will be displayed as raw HTML
+      // action will be called onclick of the button.
+      //    If you return a value, then you will prevent the alert from closing on click.
+      //    action will be passed an object as an argument that has the values for the fields you set above
+      // You will need to manually cancel the alert at that point with $IFCAlertCancel(alert.id)
+      buttons: [
+        {
+          variant: 'primary',
+          content: 'HTML Content',
+
+          // it is strongly recommended you use arrow functions since they determine execution context lexically, so
+          // `this` will always reference the vue component.
+          action: (data) => {
+            /**
+            * Disabled because we just want a low effort way to demonstrate callback.
+            */
+            /* eslint-disable-next-line no-alert */
+            alert(JSON.stringify(data, null, 2));
+          },
+        },
+      ],
+    });
+  },
+};
+
+</script>
+```

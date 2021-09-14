@@ -1,0 +1,41 @@
+@use '../Text/_textConstants' as text;
+@use '../_colors.scss' as colors;
+
+$CardPadding: 1em;
+
+.IFCCard {
+  @include text.DefaultFont;
+  display: inline-block;
+  padding: $CardPadding;
+  border-radius: .25em;
+
+  @include colors.themed() {
+    color: colors.retrieveColor('text-normal');
+    background-color: colors.retrieveColor('card-background');
+    border: 1px solid colors.retrieveColor('card-border');
+    box-shadow: colors.retrieveColor('card-boxShadow');
+  }
+
+  &__titleArea {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: var(--IFC-card-title-justify);
+  }
+
+  &__imageArea {
+    & img {
+      width: calc(100% + 2 * #{$CardPadding});
+      margin-left: -$CardPadding;
+    }
+  }
+
+  &__contentArea {
+    padding-top: $CardPadding;
+  }
+
+  &__buttonArea {
+    margin-top: $CardPadding;
+  }
+
+}

@@ -1,0 +1,54 @@
+@use '../Text/_textConstants' as text;
+@use '../_colors.scss' as colors;
+
+.IFCTableOfContents {
+  display: block;
+
+  &__table {
+    padding-left: 0px;
+    list-style: none;
+  }
+
+  &__toggler {
+    @include text.DefaultFont;
+    @include text.BoldFont;
+    font-size: text.$NormalTextSize;
+    pointer-events: none;
+    color: #ff7200;
+  }
+  &__item {
+    border-left-style: solid;
+    border-left-width: 2px;
+    font-size: 14px;
+    cursor: pointer;
+    @include colors.themed() {
+      color: colors.retrieveColor('text-normal');
+    }
+    transition: 0.2s all;
+    max-height: 0px;
+    overflow: hidden;
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+    -khtml-user-select: none; /* Konqueror HTML */
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+    user-select: none;
+    @include text.DefaultFont;
+    border-color: rgba(0, 0, 0, 0.1);
+    &--title {
+      font-size: text.$NormalTextSize;
+      padding-left: .5em;
+    }
+    &--margined {
+      border-left-style: solid;
+      border-left-width: 3px;
+      border-left-color: #ff7200;
+      font-weight: bold;
+    }
+    &--visible {
+      max-height: 100px;
+      padding-bottom: 2px;
+      padding-top: 2px;
+    }
+  }
+}

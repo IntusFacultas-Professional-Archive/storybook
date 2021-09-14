@@ -1,0 +1,152 @@
+@use '../Text/_textConstants' as text;
+@use '../_constants' as constants;
+@use '../_colors' as colors;
+@use './_buttonConstants' as buttonConstants;
+
+
+
+
+.#{buttonConstants.$ButtonClassName} {
+  @include constants.RoundedElementStyling;
+  @include text.DefaultTextStyling;
+
+  // default behavior
+  border-radius: buttonConstants.$ButtonBorderRadius;
+  vertical-align: middle;
+  text-align: var(--IFC-button-text-align);
+  cursor: pointer;
+  display: inline-block;
+  font-weight: bold;
+  background-color: transparent;
+  transition:
+    background-color constants.$DefaultTiming ease-out,
+    color constants.$DefaultTiming ease-out,
+    box-shadow constants.$DefaultTiming ease-out;
+  &:active {
+    box-shadow: 0px 0px 2px 3px rgba(0,0,0, 0.1);
+  }
+  &:disabled {
+    pointer-events: none;
+    opacity: constants.$DisabledOpacity;
+  }
+  &:focus {
+    outline: 0;
+  }
+
+  // color variants
+  &--transparent {
+    @include text.DefaultTextStyling;
+    background-color: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 0;
+    padding: .25em 1em;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color, .3s ease-out;
+    border-radius: constants.$DefaultBorderRadius;
+    @include colors.themed() {
+      color: colors.retrieveColor('text-normal');
+      & svg {
+        fill: colors.retrieveColor('text-normal');
+      }
+      &:hover, &:focus {
+        background-color: colors.retrieveColor('transparent-hover');
+      }
+
+    }
+  }
+  &--info {
+    @include colors.themed() {
+      border-color: colors.retrieveColor('info');
+      color: colors.retrieveColor('text-normal');
+      fill: colors.retrieveColor('info');
+      &:hover, &:focus {
+        background-color: colors.retrieveColor('info');
+        color: colors.retrieveColor('text-dark');
+        fill: colors.retrieveColor('text-dark');
+      }
+    }
+  }
+  &--primary {
+    @include colors.themed() {
+      border-color: colors.retrieveColor('primary');
+      color: colors.retrieveColor('primary');
+      fill: colors.retrieveColor('primary');
+      &:hover, &:focus {
+        background-color: colors.retrieveColor('primary');
+        color: colors.retrieveColor('text-white');
+        fill: colors.retrieveColor('text-white')
+      }
+    }
+  }
+  &--success {
+    @include colors.themed() {
+      border-color: colors.retrieveColor('success');
+      color: colors.retrieveColor('text-normal');
+      fill: colors.retrieveColor('text-normal');
+      &:hover, &:focus {
+        background-color: colors.retrieveColor('success');
+        color: colors.retrieveColor('text-dark');
+        fill: colors.retrieveColor('text-dark');
+      }
+    }
+  }
+  &--danger {
+    @include colors.themed() {
+      border-color: colors.retrieveColor('danger');
+      color: colors.retrieveColor('text-normal');
+      fill: colors.retrieveColor('text-normal');
+      &:hover, &:focus {
+        background-color: colors.retrieveColor('danger');
+        color: colors.retrieveColor('text-white');
+        fill: colors.retrieveColor('text-white')
+      }
+    }
+  }
+  &--warning {
+    @include colors.themed() {
+      border-color: colors.retrieveColor('warning');
+      color: colors.retrieveColor('text-normal');
+      fill: colors.retrieveColor('warning');
+      &:hover, &:focus {
+        background-color: colors.retrieveColor('warning');
+        color: colors.retrieveColor('text-dark');
+        fill: colors.retrieveColor('text-dark')
+      }
+    }
+  }
+
+  // size and shape variants
+  &--block {
+    width: 100%;
+    display: block;
+  }
+  &--sm {
+    padding: .15em .5em;
+  }
+  &--md {
+    padding: .25em 1em;
+  }
+  &--lg {
+    padding: .5em 1.5em;
+  }
+  &--endcap {
+    border-radius: 0px;
+    margin-top: 0;
+    margin-bottom: 0;
+    margin-left: -#{constants.$DefaultBorderWidth};
+    margin-right: -#{constants.$DefaultBorderWidth};
+    height: 100%;
+  }
+  &--circle {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 100%;
+    padding: 0;
+    height: var(--IFC-button-circle-dimension);
+    width: var(--IFC-button-circle-dimension);
+  }
+}

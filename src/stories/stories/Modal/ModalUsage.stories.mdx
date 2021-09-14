@@ -1,0 +1,61 @@
+import { Meta, ArgsTable } from '@storybook/addon-docs/blocks';
+// import {Title} from '@storybook/addon-docs';
+import {IFCModal} from '@Components/Modal/IFCModal'
+
+<Meta title="Presentational Components/Layout/Modal/Usage" />
+
+# IFC Modal
+
+This documentation explains how you can toggle the modal
+
+
+## Using the modal
+
+The modal can be used in two different ways
+
+
+## Using the show prop
+
+If you use the show prop, the modal will show or hide based on the boolean value of that prop,
+and will emit `toggle` events when the user clicks on the background (if `allowBackgroundDismiss` is set to true)
+or clicks on the close modal button (if the header isn't overriden)
+
+
+## Using the IFCModalPlugin
+
+You can also use the IFCModalPlugin, which binds a method to all your vue components called `$IFCModal` and accepts
+two arguments: `modalId` and `visibile`.
+
+- `modalId` should be the id of the modal you want to target
+- `visible` whether the targeted modal should open (if true) or close (if close)
+
+```html
+<template>
+  <IFCThemeProvider>
+    <IFCModal id="SampleModal" modalDescription="I'm a modal!" />
+  </IFCThemeProvider>
+</template>
+
+<script>
+import { IFCThemeProvider, IFCModalPlugin, IFCModal } from '@nasic/component-library/build/index.esm';
+import Vue from 'vue';
+
+Vue.use(IFCModalPlugin);
+
+export default {
+  components: {
+    IFCModal,
+    IFCThemeProvider,
+  },
+  mounted() {
+    // show the modal on mount!
+    this.$IFCModal('SampleModal', true);
+  },
+  beforeDestroy() {
+    // hide the modal before destroy!
+    this.$IFCModal('SampleModal', false);
+  },
+};
+
+</script>
+```

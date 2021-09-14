@@ -1,0 +1,60 @@
+import { Meta, ArgsTable } from '@storybook/addon-docs/blocks';
+// import {Title} from '@storybook/addon-docs';
+
+<Meta title="Presentational Components/Navbars/Navbar/Usage" />
+
+# IFC Navbar
+
+```html
+<template>
+  <IFCThemeProvider>
+    <IFCNavbar :breakpoint="1000" background='#065C7D' >
+      <template v-slot:title>
+        <IFCH1 color="white" marginless>
+          Some Header or another
+        </IFCH1>
+      </template>
+      <template v-slot:left>
+        <IFCNavbarLink color="white" href="#">
+          Left Link 1
+        </IFCNavbarLink>
+        <IFCNavbarLink color="white" href="#">
+          Left Link 2
+        </IFCNavbarLink>
+      </template>
+      <template v-slot:middle>
+        <IFCNavbarLink color="white" href="#">
+          Middle Link 1
+        </IFCNavbarLink>
+        <IFCNavbarLink color="white" href="#">
+          Middle Link 2
+        </IFCNavbarLink>
+      </template>
+      <template v-slot:right>
+        <IFCNavbarLink color="white" href="#">
+          Right Link 1
+        </IFCNavbarLink>
+        <IFCNavbarLink color="white" href="#">
+          Right Link 2
+        </IFCNavbarLink>
+      </template>
+    </IFCNavbar>
+  </IFCThemeProvider>
+</template>
+
+<script>
+import {
+  IFCThemeProvider, IFCNavbar, IFCH1, IFCNavbarLink,
+} from '@nasic/component-library/build/index.esm';
+
+export default {
+  components: {
+    IFCNavbar,
+    IFCH1,
+    IFCNavbarLink,
+    IFCThemeProvider,
+  },
+};
+</script>
+
+```

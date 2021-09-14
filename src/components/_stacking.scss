@@ -1,0 +1,78 @@
+$BuriedContentZIndex: -1;
+
+/**
+* Base Content
+*/
+$RelationshipZIndex: 0;
+$ActionsDropdownZIndex: $RelationshipZIndex;
+$NesterZIndex: $RelationshipZIndex;
+$InputZIndex: $RelationshipZIndex;
+
+/**
+* First layer floating above base content
+*/
+
+$MapFilterTitleZIndex: $RelationshipZIndex + 1;
+$RelationshipBadgeZIndex: $MapFilterTitleZIndex;
+$PinnedTableCellZIndex: $MapFilterTitleZIndex;
+
+/** 
+* Second layer floating above base content
+*/
+
+$TableHeaderZIndex: $MapFilterTitleZIndex + 1;
+$GraphEditorOverlayZIndex: $TableHeaderZIndex;
+$SpacingSelectorZIndex: $TableHeaderZIndex;
+$PageSelectorZIndex: $TableHeaderZIndex;
+
+
+/**
+* Third layer floating above base content
+*/
+$PinnedTableHeaderZIndex: $TableHeaderZIndex + 1;
+
+/**
+* Fourth layer floating above content
+*/
+$GraphEditorMenuZIndex: $PinnedTableHeaderZIndex+ 1;
+
+/**
+* Fifth layer floating above content
+*/
+$DropdownZIndex: $GraphEditorMenuZIndex + 1;
+$DropdownSelectedZIndex: $DropdownZIndex;
+$TagEditorZIndex: $DropdownSelectedZIndex;
+
+/**
+* Sixth layer floating above content
+*/
+
+$DropdownLabelZIndex: $DropdownSelectedZIndex + 1;
+
+/**
+* Seventh layer floating above content
+*/
+$DropdownMenuZIndex: $DropdownLabelZIndex + 1;
+
+/**
+* Sidebars and Navbars
+*/
+$CollapsedSidebarBackdropZIndex: $DropdownMenuZIndex + 1;
+$CollapsedSidebarZIndex: $CollapsedSidebarBackdropZIndex + 1;
+$CollapsedSidebarTogglerZIndex: $CollapsedSidebarZIndex + 1;
+$NavbarZIndex: $CollapsedSidebarTogglerZIndex + 1;
+$CollapsedNavbarBackdropZIndex: $NavbarZIndex + 1;
+$CollapsedNavbarZIndex: $CollapsedNavbarBackdropZIndex + 1;
+
+/**
+* Modal
+*/
+$ModalBackdropZIndex: $CollapsedNavbarZIndex + 1;
+$ModalZIndex: $ModalBackdropZIndex + 1;
+
+
+/**
+* Alert
+*/
+$AlertBackdropZIndex: $ModalZIndex + 1;
+$AlertModalZIndex: $AlertBackdropZIndex + 1;

@@ -1,0 +1,136 @@
+@use 'sass:math';
+@use '../Text/_textConstants.scss' as text;
+@use '../_stacking' as stacking;
+@use '../_colors' as colors;
+
+$EndcapInputWidth: 60px;
+$SliderHeight: 20px;
+
+.IFCSlideFilter {
+  display:flex;
+  flex-direction: column;
+  &__inputContainer {
+    display: flex;
+    flex-direction: row;
+  }
+  &__input {
+    @include text.DefaultTextStyling;
+    background-color: transparent;
+    border : 0;
+    max-width: $EndcapInputWidth;
+    text-align: center;
+    box-sizing: border-box;
+    width:100%;
+    &::-webkit-outer-spin-button,
+    &::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+    -moz-appearance: textfield;
+    padding:.25em .5em;
+    @include colors.themed() {
+      color: colors.retrieveColor('text-normal');
+    }
+  }
+  &__slider {
+    position: absolute;
+    top: math.div($SliderHeight, 2);
+    left: 0;
+    height: $SliderHeight;
+    width: 100%;
+    pointer-events: none;
+    background: transparent;
+    -webkit-appearance: none;
+    overflow: hidden;
+    outline: none;
+    margin: 0;
+    padding: 0;
+    border: none;
+    border-radius: math.div($SliderHeight, 2);
+    &::-webkit-slider-thumb {
+      cursor: pointer;
+      pointer-events: all;
+      position: relative;
+      outline: 0;
+      -webkit-appearance: none;
+      width: $SliderHeight;
+      height: $SliderHeight;
+      border: none;
+      border-radius: 100%;
+    }
+    &::-moz-range-thumb {
+      cursor: pointer;
+      pointer-events: all;
+      position: relative;
+      -moz-appearance: none;
+      width: $SliderHeight;
+      height: $SliderHeight;
+      border: none;
+      border-radius: 100%;
+    }
+    &::-ms-thumb {
+      cursor: pointer;
+      pointer-events: all;
+      position: relative;
+      -ms-appearance: none;
+      width: $SliderHeight;
+      height: $SliderHeight;
+      border-radius: 100%;
+      border: 0;
+    }
+    &::-moz-range-track {
+      cursor: pointer;
+      position: relative;
+      z-index: stacking.$BuriedContentZIndex;
+      background-color: transparent;
+      border: 0;
+    }
+    @include colors.themed() {
+      box-shadow: inset 0 1px 0 0 colors.retrieveColor('primary'), inset 0 -1px 0 0 colors.retrieveColor('primary');
+      &::-ms-thumb {
+        background-image:linear-gradient(to bottom, colors.retrieveColor('primary') 0, colors.retrieveColor('primary') 100%);
+      }
+      &::-moz-range-thumb{
+        background-image:linear-gradient(to bottom, colors.retrieveColor('primary') 0, colors.retrieveColor('primary') 100%);
+      }
+      &::-webkit-slider-thumb {
+        background-image:linear-gradient(to bottom, colors.retrieveColor('primary') 0, colors.retrieveColor('primary') 100%);
+      }
+      &:focus {
+        &::-ms-thumb {
+          background-image:linear-gradient(to bottom, colors.retrieveColor('info') 0, colors.retrieveColor('info') 100%);
+        }
+        &::-moz-range-thumb{
+          background-image:linear-gradient(to bottom, colors.retrieveColor('info') 0, colors.retrieveColor('info') 100%);
+        }
+        &::-webkit-slider-thumb {
+          background-image:linear-gradient(to bottom, colors.retrieveColor('info') 0, colors.retrieveColor('info') 100%);
+        }
+      }
+    }
+  }
+  &__sliderContainer {
+    position: relative;
+    flex: 1;
+    height: $SliderHeight * 2;
+    input[type=range]:last-of-type::-moz-range-track {
+      -moz-appearance: none;
+      background: none transparent;
+      border: 0;
+    }
+
+    input[type=range]::-moz-focus-outer {
+      border: 0;
+    }
+  }
+  &__label {
+    @include text.DefaultTextStyling;
+    @include colors.themed() {
+      color: colors.retrieveColor('text-normal');
+    }
+    &--bold {
+      @include text.BoldFont;
+    }
+    margin-left: $EndcapInputWidth;
+  }
+}

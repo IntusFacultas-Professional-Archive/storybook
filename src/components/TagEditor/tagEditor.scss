@@ -1,0 +1,51 @@
+@use '../_stacking.scss' as stacking;
+@use '../_colors.scss' as colors;
+
+.IFCTagEditorContainer {
+  display: flex;
+  flex-direction: column;
+}
+.IFCTagEditor {
+  @include colors.themed() {
+    border: 2px solid colors.retrieveColor('text-normal');
+  }
+  padding: .5em;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  position: relative;
+  transition: border-color .3s ease-out;
+  min-height: 40px;
+  &:focus-within {
+    @include colors.themed() {
+      border-color: colors.retrieveColor('input-focus');
+    }
+  }
+  &__BackgroundCatcher {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+  }
+  &__Tag {
+    background-color: transparent;
+    text-decoration: underline;
+    border: 0;
+    z-index: stacking.$TagEditorZIndex;
+    cursor: pointer;
+  }
+  & input {
+    @include colors.themed() {
+      color: colors.retrieveColor('text-normal');
+    }
+    min-width: 200px;
+    flex: 1;
+    z-index: stacking.$TagEditorZIndex;
+    border: 0;
+    background-color: transparent;
+    &:focus {
+      outline: 0;
+    }
+  }
+}

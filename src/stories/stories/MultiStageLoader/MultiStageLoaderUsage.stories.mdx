@@ -1,0 +1,73 @@
+import { Meta, ArgsTable, SourceContainer } from '@storybook/addon-docs/blocks';
+
+<Meta title="Presentational Components/Multi Stage Loader/Usage" />
+
+# Multi Stage Loader Usage
+
+This is a component meant to display a loading animation for when you have to perform multiple
+serial API calls. An example for how a container component could consume this component is provided below.
+
+```html
+
+<template>
+  <IFCThemeProvider :dark="false">
+    <IFCMultiStageLoader :stages='stages' />
+  </IFCThemeProvider>
+</template>
+
+<script>
+import {
+  IFCMultiStageLoader, IFCThemeProvider,
+} from '@nasic/component-library/build/index.esm';
+
+const fakeFetch = () => new Promise((resolve) => {
+  setTimeout(() => {
+    resolve();
+  }, 3000);
+});
+
+export const MultiStageLoaderContainer = {
+  data() {
+    return {
+      stages: [
+        { title: 'Load User Profile', complete: false },
+        { title: 'Load User Preferences', complete: false },
+        { title: 'Garblesnarking the flipperflop', complete: false },
+      ],
+    };
+  },
+  components: {
+    IFCMultiStageLoader,
+    IFCThemeProvider,
+  },
+  mounted() {
+    this.loadUserProfile();
+  },
+  methods: {
+    async loadUserProfile() {
+      // a fake fetch is provided here, replace this with a normal API call.
+      await fakeFetch('/api/call/to/user/profiles');
+      this.$set(this.stages[0], 'complete', true);
+
+      // since this component is meant for serialized api calls, you can call the next api call here.
+      this.loadUserPreferences();
+    },
+    async loadUserPreferences() {
+      // a fake fetch is provided here, replace this with a normal API call.
+      await fakeFetch('/api/call/to/user/preferences');
+      this.$set(this.stages[1], 'complete', true);
+
+      // since this component is meant for serialized api calls, you can call the next api call here.
+      this.garbleSnarkTheFlipperFlop();
+    },
+    async garbleSnarkTheFlipperFlop() {
+      // a fake fetch is provided here, replace this with a normal API call.
+      await fakeFetch('/api/call/to/garble/snark/flipperflops');
+      this.$set(this.stages[2], 'complete', true);
+    },
+  },
+};
+export default MultiStageLoaderContainer;
+</script>
+
+```

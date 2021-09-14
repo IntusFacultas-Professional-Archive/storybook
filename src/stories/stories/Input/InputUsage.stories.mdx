@@ -1,0 +1,40 @@
+import { Meta, ArgsTable, SourceContainer } from '@storybook/addon-docs/blocks';
+
+<Meta title="Presentational Components/Form Components/Input/Usage" />
+
+# Input Usage
+
+```html
+<template>
+  <IFCThemeProvider :dark="false">
+    <IFCInput
+      type="text"
+      name="textInput"
+      state="default"
+      v-model="value"
+    >
+      <template v-slot:label>
+        Text Input
+      </template>
+    </IFCInput>
+  </IFCThemeProvider>
+</template>
+
+<script>
+import {
+  IFCInput, IFCThemeProvider,
+} from '@nasic/component-library/build/index.esm';
+
+export default {
+  data() {
+    return {
+      value: '',
+    };
+  },
+  components: {
+    IFCInput,
+    IFCThemeProvider,
+  },
+};
+</script>
+```

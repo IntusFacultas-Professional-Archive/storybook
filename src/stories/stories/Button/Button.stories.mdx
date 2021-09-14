@@ -1,0 +1,27 @@
+import { Meta, ArgsTable } from '@storybook/addon-docs/blocks';
+// import {Title} from '@storybook/addon-docs';
+
+<Meta title="Presentational Components/Form Components/Button/Usage" />
+
+# IFC Button
+
+
+```html
+<template>
+  <IFCThemeProvider>
+    <IFCButton variant='primary'>My Custom Button</IFCButton>
+  </IFCThemeProvider>
+</template>
+
+<script>
+import { IFCThemeProvider, IFCButton } from '@nasic/component-library/build/index.esm';
+
+export default {
+  components: {
+    IFCButton,
+    IFCThemeProvider,
+  },
+};
+
+</script>
+```

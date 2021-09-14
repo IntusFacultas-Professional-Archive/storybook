@@ -1,0 +1,65 @@
+@use '../Text/_textConstants' as text;
+@use '../_colors.scss' as colors;
+.IFCRadio {
+  @include text.DefaultTextStyling;
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  cursor: pointer;
+  white-space: nowrap;
+  @include colors.themed() {
+    color: colors.retrieveColor('text-normal');
+    &:focus-within > div, &:focus > div {
+      box-shadow: 0px 0px 0px 3px colors.retrieveColor('radio-boxShadow');
+    }
+  }
+
+  &--primary {
+    &--checked {
+      &:focus-within > div, &:focus > div {
+        @include colors.themed() {
+          box-shadow:inset 0px 0px 0px 3px colors.retrieveColor('primary'),
+           0px 0px 0px 3px colors.retrieveColor('radio-boxShadow');
+        }
+      }
+    }
+  }
+
+  &__circle {
+    height: .75em;
+    width: .75em;
+    border-radius: 100%;
+    border-width: 2px;
+    border-style: solid;
+    cursor: pointer;
+    margin-right: .5em;
+    transition: box-shadow .15s ease-out;
+
+    &--primary {
+      @include colors.themed() {
+        border-color: colors.retrieveColor('primary');
+        &:hover {
+          box-shadow: 0px 0px 0px 3px colors.retrieveColor('radio-boxShadow');
+        }
+      }
+      &--checked {
+        @include colors.themed() {
+          box-shadow: inset 0px 0px 0px 3px colors.retrieveColor('primary');
+          &:hover {
+            box-shadow:
+              inset 0px 0px 0px 3px colors.retrieveColor('primary'),
+               0px 0px 0px 3px colors.retrieveColor('radio-boxShadow')
+          }
+        }
+      }
+    }
+  }
+  &__input {
+    opacity: 0;
+    position: absolute;
+    left: 0;
+    height: 1px;
+    width: 1px;
+    overflow: hidden;
+  }
+}

@@ -1,0 +1,162 @@
+@use '../Text/textConstants' as text;
+@use '../_constants.scss' as constants;
+@use '../_stacking.scss' as stacking;
+
+.IFCNavbarBackdrop-enter-active, .IFCNavbarBackdrop-leave-active {
+  transition: opacity .15s ease-out;
+}
+.IFCNavbarBackdrop-enter, .IFCNavbarBackdrop-leave-to {
+  opacity: 0;
+}
+.IFCNavbarCollapse-enter-active, .IFCNavbarCollapse-leave-active {
+  transition: transform .15s ease-out;
+}
+.IFCNavbarCollapse-enter, .IFCNavbarCollapse-leave-to {
+  transform: translateX(max(30%, 300px));
+}
+.IFCNavbar {
+  background-color: var(--IFC-navbar-color);
+  padding: 1em .5em ;
+  z-index: stacking.$NavbarZIndex;
+  position: relative;
+
+  &--collapsed {
+    box-shadow: -4px 0px 4px 2px rgba(0,0,0, 0.1);
+    box-sizing: border-box;
+    position: fixed;
+    z-index: stacking.$CollapsedNavbarZIndex;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    overflow: auto;
+    height: 100vh;
+    width: max(25%, 300px);
+    @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+      min-width: 300px;
+      width: 25%;
+    }
+    padding: 1em;
+    background-color: var(--IFC-navbar-color);
+  }
+  &--sticky {
+    position: sticky;
+    top: var(--IFC-navbar-top);
+  }
+
+  &__content {
+    display: inline-flex;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    flex-shrink: 1;
+    align-items: center;
+    &:first-of-type {
+      justify-content: flex-start;
+    }
+    &:nth-of-type(2) {
+      justify-content: center;
+    }
+    &:last-of-type {
+      justify-content: flex-start;
+    }
+  }
+  &__collapsedContent {
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    & > li {
+      align-items: center;
+      width: 100%;
+      padding-right: 2em;
+      box-sizing: border-box;
+      display:flex;
+    }
+    li + li {
+      margin-top: 1em;
+    }
+  }
+
+  &__externalContainer {
+    display: flex;
+    padding-right: 1em;
+  }
+
+  &__backdrop {
+    backdrop-filter: blur(2px);
+    background-color: rgba(0,0,0, 0.1);
+    z-index: stacking.$CollapsedNavbarBackdropZIndex;
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+  }
+
+  &__button {
+    border-radius: constants.$DefaultBorderRadius;
+    border: 0;
+    background-color: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: .25em;
+    transition: background-color .3s ease-out, box-shadow .3s ease-out;
+    cursor: pointer;
+    &:focus {
+      box-shadow: 0px 0px 4px 2px #f1f1f1;
+    }
+    &:hover {
+      background-color: rgba(255,255,255, 0.1);
+    }
+    & svg {
+      fill: var(--IFC-navbar-button-color);
+    }
+  }
+
+  &__buttonContainer {
+    display: none;
+    &--override {
+      display: flex;
+      justify-content: flex-end;
+      flex: 1;
+      margin-bottom: 1em;
+      position: sticky;
+      z-index: 2;
+      top: 0;
+    }
+  }
+
+  &__contentContainer {
+    flex: 1;
+    display: flex;
+    justify-content: space-between;
+    $breakpoint: var(--IFC-navbar-breakpoint);
+  }
+
+  &__titleContainer {
+    display: inline-flex;
+    flex-shrink: 1;
+    padding-right: 1em;
+    align-items: center;
+  }
+}
+
+
+.IFCNavbarLink {
+  padding: 0 .5em;
+  list-style: none;
+  &__link {
+    @include text.DefaultTextStyling;
+    opacity: 0.6;
+    cursor: pointer;
+    text-decoration: none;
+    transition: opacity .3s ease-out;
+    &:hover, &:focus {
+      opacity: 1.0;
+    }
+  }
+}

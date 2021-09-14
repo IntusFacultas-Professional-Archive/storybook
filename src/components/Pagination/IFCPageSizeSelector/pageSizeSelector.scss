@@ -1,0 +1,22 @@
+@use '../../Text/_textConstants.scss' as text;
+@use '../../_colors.scss' as colors;
+
+.IFCPageSizeSelector {
+  max-width: 100px;
+  padding: .25em;
+  border-width: 0;
+  background-color: transparent;
+  @include text.DefaultTextStyling;
+  @include colors.themed() {
+    color: colors.retrieveColor('text-normal');
+  }
+  & option {
+    color: #444;
+  }
+}
+.IFCPageSizeSelectorText {
+  @include text.DefaultTextStyling;
+  @include colors.themed() {
+    color: colors.retrieveColor('text-normal');
+  }
+}

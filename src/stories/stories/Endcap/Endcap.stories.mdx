@@ -1,0 +1,54 @@
+import { Meta, ArgsTable } from '@storybook/addon-docs/blocks';
+// import {Title} from '@storybook/addon-docs';
+
+<Meta title="Presentational Components/Form Components/Endcap/Usage" />
+
+# IFC Endcap
+
+
+```html
+<template>
+  <IFCThemeProvider :dark="false">
+    <IFCInput
+      type="text"
+      name="textInput"
+      state="default"
+      v-model="value"
+    >
+      <template v-slot:label>
+        Text Input
+      </template>
+      <template #front-endcap>
+        <IFCCap front>
+          Front
+        </IFCCap>
+      </template>
+      <template #endcap>
+        <IFCCap>
+          End
+        </IFCCap>
+      </template>
+    </IFCInput>
+  </IFCThemeProvider>
+</template>
+
+<script>
+import {
+  IFCInput, IFCThemeProvider, IFCCap,
+} from '@nasic/component-library/build/index.esm';
+
+export default {
+  data() {
+    return {
+      value: '',
+    };
+  },
+  components: {
+    IFCInput,
+    IFCCap,
+    IFCThemeProvider,
+  },
+};
+</script>
+
+```

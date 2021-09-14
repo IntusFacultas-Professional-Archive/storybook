@@ -6800,8 +6800,8 @@ __webpack_require__.r(__webpack_exports__);
 var require;var require;function _typeof(obj){"@babel/helpers - typeof";if("function"==typeof Symbol&&"symbol"==typeof Symbol.iterator){_typeof=function(obj){return typeof obj}}else{_typeof=function(obj){return obj&&"function"==typeof Symbol&&obj.constructor===Symbol&&obj!==Symbol.prototype?"symbol":typeof obj}}return _typeof(obj)}// svg-pan-zoom v3.6.0
 // https://github.com/ariutta/svg-pan-zoom
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a="function"==typeof require&&require;if(!u&&a)return require(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}for(var i="function"==typeof require&&require,o=0;o<r.length;o++){s(r[o])}return s})({1:[function(require,module){var svgPanZoom=require("./svg-pan-zoom.js");// UMD module definition
-(function(window){// AMD
-if("function"==typeof define&&__webpack_require__(/*! !webpack amd options */ "./node_modules/webpack/buildin/amd-options.js")){define("svg-pan-zoom",function(){return svgPanZoom});// CMD
+(function(window){// IFC
+if("function"==typeof define&&__webpack_require__(/*! !webpack IFC options */ "./node_modules/webpack/buildin/IFC-options.js")){define("svg-pan-zoom",function(){return svgPanZoom});// CMD
 }else if("undefined"!=typeof module&&module.exports){module.exports=svgPanZoom;// Browser
 // Keep exporting globally as module.exports is available because of browserify
 window.svgPanZoom=svgPanZoom}})(window,document)},{"./svg-pan-zoom.js":4}],2:[function(require,module){var SvgUtils=require("./svg-utilities");module.exports={enable:function enable(instance){// Select (and create if necessary) defs

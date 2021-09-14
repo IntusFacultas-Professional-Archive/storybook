@@ -1,0 +1,32 @@
+import { Meta, ArgsTable, SourceContainer } from '@storybook/addon-docs/blocks';
+
+<Meta title="Presentational Components/Pagination/Page Size Selector/Usage" />
+
+# Page Selector
+
+```html
+<template>
+<IFCThemeProvider >
+  <IFCPageSizeSelector v-model="page" :pageSizes="pageSizes" />
+</IFCThemeProvider>
+</template>
+
+<script>
+import {
+  IFCThemeProvider, IFCPageSizeSelector
+} from '@nasic/component-library/build/index.esm';
+
+export default {
+  components: {
+    IFCThemeProvider,
+    IFCPageSizeSelector
+  },
+  data() {
+    return {
+      page: 1,
+      pageSizes: [1,5,10,20]
+    }
+  }
+}
+</script>
+```

@@ -1,0 +1,149 @@
+import { Meta, ArgsTable, SourceContainer } from '@storybook/addon-docs/blocks';
+
+<Meta title="Presentational Components/Form Components/Dropdown/Usage" />
+
+# Dropdown Usage
+
+```html
+<template>
+  <IFCThemeProvider :dark="false">
+    <IFCDropdown
+    :value='value'
+   :searchFn="searchFn"
+   :optionSelectedFn="optionSelectedFn"
+   :options='options'
+   name="SearchableDropdown"
+   :disabled="false"
+   :autofocus="false"
+   state="default"
+   @input="handleInput"
+ >
+      <template v-slot:label>
+        Dropdown with options
+      </template>
+      <template v-slot:selected="{option}">
+        {{option.text}}
+      </template>
+      <template v-slot:option="{option}">
+        {{option.text}}
+      </template>
+    </IFCDropdown>
+  </IFCThemeProvider>
+</template>
+
+<script>
+import {
+  IFCDropdown, IFCThemeProvider,
+} from '@nasic/component-library/build/index.esm';
+
+export const DropdownContainer = {
+  data() {
+    return {
+      value: [],
+      options: [
+        { text: 'Value 1', value: 'value1' },
+        { text: 'Value 2', value: 'value2' },
+        { text: 'Value 3', value: 'value3' },
+        { text: 'Value 4', value: 'value4' },
+        { text: 'Value 5', value: 'value5' }],
+    };
+  },
+  components: {
+    IFCDropdown,
+    IFCThemeProvider,
+  },
+  methods: {
+    handleInput(value) {
+      if (this.value.map(((obj) => obj.value)).includes(value.value)) {
+        // using Vue.set here because Vue reactivity when assigning objects or arrays can be sus
+        this.$set(this, 'value', this.value.filter((obj) => obj.value !== value.value));
+      } else {
+        // its good practice to perform either a deep or shallow copy depending on your object structure
+        // since JS passes objects by reference
+        this.value.push({ ...value });
+      }
+    },
+    searchFn(text, value) {
+      return value.text.toUpperCase().includes(text.toUpperCase());
+    },
+    optionSelectedFn(obj, value) {
+      return value.map((v) => v.value).includes(obj.value);
+    },
+  },
+};
+export default DropdownContainer;
+</script>
+```
+
+# Dropdown Async Usage
+
+```html
+<template>
+  <IFCThemeProvider :dark="false">
+    <IFCDropdown
+      :value='value'
+      :searchFn="searchFn"
+      :optionSelectedFn="optionSelectedFn"
+      :options='options'
+      name="SearchableDropdown"
+      :disabled="false"
+      :autofocus="false"
+      state="default"
+      @input="handleInput"
+    >
+      <template v-slot:label>
+        Dropdown with options
+      </template>
+      <template v-slot:selected="{option}">
+        {{option.text}}
+      </template>
+      <template v-slot:option="{option}">
+        {{option.text}}
+      </template>
+    </IFCDropdown>
+  </IFCThemeProvider>
+</template>
+
+<script>
+import {
+  IFCDropdown, IFCThemeProvider,
+} from '@nasic/component-library/build/index.esm';
+
+export default {
+  data() {
+    return {
+      value: [],
+      options: [
+        { text: 'Value 1', value: 'value1' },
+        { text: 'Value 2', value: 'value2' },
+        { text: 'Value 3', value: 'value3' },
+        { text: 'Value 4', value: 'value4' },
+        { text: 'Value 5', value: 'value5' }],
+    };
+  },
+  components: {
+    IFCDropdown,
+    IFCThemeProvider,
+  },
+  methods: {
+    handleInput(value) {
+      if (this.value.map(((obj) => obj.value)).includes(value.value)) {
+        // using Vue.set here because Vue reactivity when assigning objects or arrays can be sus
+        this.$set(this, 'value', this.value.filter((obj) => obj.value !== value.value));
+      } else {
+        // its good practice to perform either a deep or shallow copy depending on your object structure
+        // since JS passes objects by reference
+        this.value.push({ ...value });
+      }
+    },
+    searchFn(text, value) {
+      return value.text.toUpperCase().includes(text.toUpperCase());
+    },
+    optionSelectedFn(obj, value) {
+      return value.map((v) => v.value).includes(obj.value);
+    },
+  },
+};
+</script>
+
+```

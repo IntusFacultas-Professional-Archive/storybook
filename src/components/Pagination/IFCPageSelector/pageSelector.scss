@@ -1,0 +1,70 @@
+@use '../../Text/_textConstants.scss' as text;
+@use '../../_constants.scss' as constants;
+@use '../../_stacking.scss' as stacking;
+@use '../../_colors.scss' as colors;
+
+.IFCPageSelector {
+  display: flex;
+  align-items: center;
+
+  &__container {
+    position: relative;
+    height: 30px;
+    width: 50px;
+    margin: 0 .25em;
+  }
+
+  &__button {
+    display: inline-flex;
+    align-items: center;
+    padding: .25em;
+    justify-content: center;
+    & svg {
+      height: 24px;
+      width: 24px;
+    }
+  }
+
+  &__dropdown {
+    border-radius: constants.$DefaultBorderRadius;
+    padding: .5em;
+    z-index: stacking.$PageSelectorZIndex;
+    position: absolute;
+
+    width: 100px;
+    overflow-y: auto;
+    @include colors.themed() {
+      background-color: colors.retrieveColor('background');
+      color: colors.retrieveColor('text-normal');
+      box-shadow: colors.retrieveColor('pagination-boxShadow');
+    }
+  }
+
+  &__input {
+    @include text.DefaultTextStyling;
+    border-radius: constants.$DefaultBorderRadius;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    width: 100%;
+    box-sizing: border-box;
+    background-color: transparent;
+    border: 1px solid rgba(0,0,0,0.1);
+    text-align: center;
+    &:focus {
+      outline: 0;
+      box-shadow: 0px 0px 4px 2px rgba(0,0,0,0.05);
+    }
+    &::-webkit-outer-spin-button,
+    &::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+    -moz-appearance:textfield; /* Firefox */
+    @include colors.themed() {
+      color: colors.retrieveColor('text-normal');
+    }
+  }
+}

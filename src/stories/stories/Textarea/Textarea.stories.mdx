@@ -1,0 +1,39 @@
+import { Meta, ArgsTable, SourceContainer } from '@storybook/addon-docs/blocks';
+
+<Meta title="Presentational Components/Form Components/Textarea/Usage" />
+
+# Textarea Usage
+
+```html
+<template>
+  <IFCThemeProvider :dark="false">
+    <IFCTextarea
+      name="textInput"
+      state="default"
+      v-model="value"
+    >
+      <template v-slot:label>
+        Text Input
+      </template>
+    </IFCTextarea>
+  </IFCThemeProvider>
+</template>
+
+<script>
+import {
+  IFCTextarea, IFCThemeProvider,
+} from '@nasic/component-library/build/index.esm';
+
+export default {
+  data() {
+    return {
+      value: '',
+    };
+  },
+  components: {
+    IFCTextarea,
+    IFCThemeProvider,
+  },
+};
+</script>
+```

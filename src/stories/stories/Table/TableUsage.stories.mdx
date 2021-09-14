@@ -1,0 +1,634 @@
+import { Meta, ArgsTable, SourceContainer } from '@storybook/addon-docs/blocks';
+
+<Meta title="Presentational Components/Table/Table/Usage" />
+
+# IFCTable
+
+There are functionally 3 ways to use this component.
+- Data Driven
+- Data Driven with overriden cells
+- Manually constructed.
+
+Examples of each have been provided, as well as 
+- an example for handling interactive cells and pinning
+- an example for handling sorting
+
+## Data Driven
+
+```html
+<template>
+  <IFCThemeProvider :dark="false">
+    <IFCTable
+      :items='items'
+      :sizing="sizing"
+      :pageSizes="pageSizes"
+      :page="page"
+      :pages="pages"
+      :resultsPerPage="currentPageSize"
+      @sizeChange="handleSizeChange"
+      @pageChange="handlePageChange"
+      @pageSize="handlePageSizeChange"
+      >
+      <template v-slot:title>
+        <h1>Table Title</h1>
+      </template>
+    </IFCTable>
+  </IFCThemeProvider>
+</template>
+
+<script>
+import { IFCTable, IFCThemeProvider } from '@nasic/component-library/build/index.esm';
+
+export default {
+  data() {
+    return {
+      sizing: 'regular',
+      pageSizes: [25, 50, 100],
+      currentPageSize: 25,
+      page: 1,
+      pages: 20,
+      items: [
+        {
+          identifier: 'Some Identifier',
+          snake_case_key: 'Some value',
+          'Title Case Key': 'Some third value',
+        },
+        {
+          snake_case_key: 'Some other value',
+          camelCaseKey: 'Some other other value',
+          'Title Case Key': 'Some third value',
+        },
+        {
+          identifier: 'Some Identifier1',
+          snake_case_key: 'Some value1',
+          camelCaseKey: 'Some other value1',
+          'Title Case Key': 'Some third value',
+        },
+        {
+          identifier: 'Some Identifier2',
+          snake_case_key: 'Some value2',
+          'Title Case Key': 'Some third value',
+        },
+        {
+          identifier: 'Some Identifier3',
+          snake_case_key: 'Some value3',
+          camelCaseKey: 'Some other value3',
+          'Title Case Key': 'Some third value',
+        },
+      ],
+    };
+  },
+  components: {
+    IFCTable,
+    IFCThemeProvider,
+  },
+  methods: {
+    handlePageSizeChange(value) {
+      this.currentPageSize = value;
+    },
+    handlePageChange(value) {
+      this.page = value;
+    },
+    handleSizeChange(value) {
+      this.sizing = value;
+    },
+  },
+};
+</script>
+```
+
+## Data Driven With Overriden Cells
+
+```html
+<template>
+  <IFCThemeProvider :dark="false">
+    <IFCTable
+      :items='items'
+      :sizing="sizing"
+      :pageSizes="pageSizes"
+      :page="page"
+      :pages="pages"
+      :resultsPerPage="currentPageSize"
+      @sizeChange="handleSizeChange"
+      @pageChange="handlePageChange"
+      @pageSize="handlePageSizeChange"
+      >
+      <template v-slot:title>
+        <h1>Table Title</h1>
+      </template>
+      <template v-slot:header="{column}">
+        Custom Content
+        <hr />
+        {{column.key}}
+        <hr/>
+        {{column.text}}
+      </template>
+      <template v-slot:cell="{item}">
+        Custom Content
+        <hr />
+        {{item.item[item.key]}}
+        <hr />
+        {{item}}
+        <hr />
+        {{item.key}}
+      </template>
+    </IFCTable>
+  </IFCThemeProvider>
+</template>
+
+<script>
+import { IFCTable, IFCThemeProvider } from '@nasic/component-library/build/index.esm';
+
+export const TableContainer = {
+  data() {
+    return {
+      sizing: 'regular',
+      pageSizes: [25, 50, 100],
+      currentPageSize: 25,
+      page: 1,
+      pages: 20,
+      items: [
+        {
+          identifier: 'Some Identifier',
+          snake_case_key: 'Some value',
+          'Title Case Key': 'Some third value',
+        },
+        {
+          snake_case_key: 'Some other value',
+          camelCaseKey: 'Some other other value',
+          'Title Case Key': 'Some third value',
+        },
+        {
+          identifier: 'Some Identifier1',
+          snake_case_key: 'Some value1',
+          camelCaseKey: 'Some other value1',
+          'Title Case Key': 'Some third value',
+        },
+        {
+          identifier: 'Some Identifier2',
+          snake_case_key: 'Some value2',
+          'Title Case Key': 'Some third value',
+        },
+        {
+          identifier: 'Some Identifier3',
+          snake_case_key: 'Some value3',
+          camelCaseKey: 'Some other value3',
+          'Title Case Key': 'Some third value',
+        },
+      ],
+    };
+  },
+  components: {
+    IFCTable,
+    IFCThemeProvider,
+  },
+  methods: {
+    handlePageSizeChange(value) {
+      this.currentPageSize = value;
+    },
+    handlePageChange(value) {
+      this.page = value;
+    },
+    handleSizeChange(value) {
+      this.sizing = value;
+    },
+  },
+};
+export default TableContainer;
+</script>
+```
+
+## Manually Constructed
+
+```html
+<template>
+  <IFCThemeProvider :dark="false">
+    <IFCTable
+      :sizing="sizing"
+      :pageSizes="pageSizes"
+      :page="page"
+      :pages="pages"
+      :resultsPerPage="currentPageSize"
+      @sizeChange="handleSizeChange"
+      @pageChange="handlePageChange"
+      @pageSize="handlePageSizeChange"
+      >
+      <template v-slot:title>
+        <h1>Table Title</h1>
+      </template>
+      <template v-slot:headers>
+        <tr>
+          <IFCTableHeader 
+            v-for="header in headers"
+            :sizing="sizing"
+            :key="header">
+            {{header}}
+          </IFCTableHeader>
+        </tr>
+      </template>
+      <template v-slot:body>
+        <tr v-for="(item, index) in items" :key="index">
+          <IFCTableCell 
+            v-for="header in headers"
+            :sizing="sizing"
+            :key="`${index}-${header}`">
+            {{item[header]}}
+          </IFCTableCell>
+        </tr>
+      </template>
+    </IFCTable>
+  </IFCThemeProvider>
+</template>
+
+<script>
+import {
+  IFCTable, IFCThemeProvider, IFCTableHeader, IFCTableCell,
+} from '@nasic/component-library/build/index.esm';
+
+export const TableContainer = {
+  data() {
+    return {
+      sizing: 'regular',
+      pageSizes: [25, 50, 100],
+      currentPageSize: 25,
+      page: 1,
+      pages: 20,
+      items: [
+        {
+          identifier: 'Some Identifier',
+          snake_case_key: 'Some value',
+          'Title Case Key': 'Some third value',
+        },
+        {
+          snake_case_key: 'Some other value',
+          camelCaseKey: 'Some other other value',
+          'Title Case Key': 'Some third value',
+        },
+        {
+          identifier: 'Some Identifier1',
+          snake_case_key: 'Some value1',
+          camelCaseKey: 'Some other value1',
+          'Title Case Key': 'Some third value',
+        },
+        {
+          identifier: 'Some Identifier2',
+          snake_case_key: 'Some value2',
+          'Title Case Key': 'Some third value',
+        },
+        {
+          identifier: 'Some Identifier3',
+          snake_case_key: 'Some value3',
+          camelCaseKey: 'Some other value3',
+          'Title Case Key': 'Some third value',
+        },
+      ],
+    };
+  },
+  components: {
+    IFCTable,
+    IFCThemeProvider,
+    IFCTableHeader,
+    IFCTableCell,
+  },
+  methods: {
+    handlePageSizeChange(value) {
+      this.currentPageSize = value;
+    },
+    handlePageChange(value) {
+      this.page = value;
+    },
+    handleSizeChange(value) {
+      this.sizing = value;
+    },
+  },
+  computed: {
+    headers() {
+      const setOfKeys = new Set([]);
+      this.items.forEach((item) => {
+        Object.keys(item).forEach((key) => setOfKeys.add(key));
+      });
+      return Array.from(setOfKeys);
+    },
+  },
+};
+export default TableContainer;
+</script>
+
+```
+
+## Interactive Cells and Pinnable Cells
+
+```html
+<template>
+  <IFCThemeProvider :dark="false">
+    <IFCTable
+      :sizing="sizing"
+      :pageSizes="pageSizes"
+      :page="page"
+      :pages="pages"
+      :resultsPerPage="currentPageSize"
+      @sizeChange="handleSizeChange"
+      @pageChange="handlePageChange"
+      @pageSize="handlePageSizeChange"
+      >
+      <template v-slot:title>
+        <h1>Table Title</h1>
+      </template>
+      <template v-slot:headers>
+        <tr>
+          <IFCTableHeader
+            v-for="header in headers"
+            :sizing="sizing"
+            :key="header">
+            {{header}}
+          </IFCTableHeader>
+        </tr>
+      </template>
+      <template v-slot:body>
+        <tr v-for="(item, index) in items" :key="index">
+          <IFCTableCell
+            v-for="header in headers"
+            @pin="handlePin(header, index)"
+            @click="handleInteractiveCell(item)"
+            :key="computeKey(header, index)"
+            :pinned="pinnedCells.includes(computeKey(header, index))"
+            :sizing="sizing"
+            interactive
+            pinnable
+            >
+            {{item[header]}}
+          </IFCTableCell>
+        </tr>
+      </template>
+    </IFCTable>
+  </IFCThemeProvider>
+</template>
+
+<script>
+import {
+  IFCTable, IFCThemeProvider, IFCTableHeader, IFCTableCell,
+} from '@nasic/component-library/build/index.esm';
+
+export const TableContainer = {
+  data() {
+    return {
+      sizing: 'regular',
+      pageSizes: [25, 50, 100],
+      currentPageSize: 25,
+      page: 1,
+      pages: 20,
+      pinnedCells: [],
+      items: [
+        {
+          identifier: 'Some Identifier',
+          snake_case_key: 'Some value',
+          'Title Case Key': 'Some third value',
+        },
+        {
+          snake_case_key: 'Some other value',
+          camelCaseKey: 'Some other other value',
+          'Title Case Key': 'Some third value',
+        },
+        {
+          identifier: 'Some Identifier1',
+          snake_case_key: 'Some value1',
+          camelCaseKey: 'Some other value1',
+          'Title Case Key': 'Some third value',
+        },
+        {
+          identifier: 'Some Identifier2',
+          snake_case_key: 'Some value2',
+          'Title Case Key': 'Some third value',
+        },
+        {
+          identifier: 'Some Identifier3',
+          snake_case_key: 'Some value3',
+          camelCaseKey: 'Some other value3',
+          'Title Case Key': 'Some third value',
+        },
+      ],
+    };
+  },
+  components: {
+    IFCTable,
+    IFCThemeProvider,
+    IFCTableHeader,
+    IFCTableCell,
+  },
+  methods: {
+    handlePageSizeChange(value) {
+      this.currentPageSize = value;
+    },
+    handlePageChange(value) {
+      this.page = value;
+    },
+    handleSizeChange(value) {
+      this.sizing = value;
+    },
+    handleInteractiveCell(item) {
+      // do whatever you want here.
+      console.log(item);
+    },
+    handlePin(header, index) {
+      const cellKey = this.computeKey(header, index);
+      if (this.pinnedCells.includes(cellKey)) {
+        // because vue reactivity can be a little sus at times, I use Vue.set for setting arrays and objects as values
+        this.$set(this, 'pinnedCells', this.pinnedCells.filter((cell) => cell !== cellKey));
+      } else {
+        this.pinnedCells.push(cellKey);
+      }
+    },
+    computeKey(header, index) {
+      return `${index}-${header}`;
+    },
+  },
+  computed: {
+    headers() {
+      const setOfKeys = new Set([]);
+      this.items.forEach((item) => {
+        Object.keys(item).forEach((key) => setOfKeys.add(key));
+      });
+      return Array.from(setOfKeys);
+    },
+  },
+};
+export default TableContainer;
+</script>
+```
+
+## Sortable Table
+
+```html
+<template>
+  <IFCThemeProvider :dark="false">
+    <IFCTable
+      :sizing="sizing"
+      :pageSizes="pageSizes"
+      :page="page"
+      :pages="pages"
+      :resultsPerPage="currentPageSize"
+      @sizeChange="handleSizeChange"
+      @pageChange="handlePageChange"
+      @pageSize="handlePageSizeChange"
+      >
+      <template v-slot:title>
+        <h1>Table Title</h1>
+      </template>
+      <template v-slot:headers>
+        <tr>
+          <IFCTableHeader
+            v-for="header in headers"
+            :sizing="sizing"
+            :key="header"
+            :activelySorted="header === activelySortedHeader"
+            :sortDirection="sortDirection"
+            @sort="handleSort(header)"
+            sortable
+            >
+            {{header}}
+          </IFCTableHeader>
+        </tr>
+      </template>
+      <template v-slot:body>
+        <tr v-for="(item, index) in sortedItems" :key="index">
+          <IFCTableCell
+            v-for="header in headers"
+            @pin="handlePin(header, index)"
+            @click="handleInteractiveCell(item)"
+            :key="computeKey(header, index)"
+            :pinned="pinnedCells.includes(computeKey(header, index))"
+            :sizing="sizing"
+            interactive
+            pinnable
+            >
+            {{item[header]}}
+          </IFCTableCell>
+        </tr>
+      </template>
+    </IFCTable>
+  </IFCThemeProvider>
+</template>
+
+<script>
+import {
+  IFCTable, IFCThemeProvider, IFCTableHeader, IFCTableCell,
+} from '@nasic/component-library/build/index.esm';
+
+export const TableContainer = {
+  data() {
+    return {
+      sizing: 'regular',
+      pageSizes: [25, 50, 100],
+      currentPageSize: 25,
+      page: 1,
+      pages: 20,
+      pinnedCells: [],
+      sortDirection: 'descending',
+      activelySortedHeader: 'identifier',
+      items: [
+        {
+          identifier: 'Some Identifier',
+          snake_case_key: 'Some value',
+          'Title Case Key': 'Some third value',
+        },
+        {
+          snake_case_key: 'Some other value',
+          camelCaseKey: 'Some other other value',
+          'Title Case Key': 'Some third value',
+        },
+        {
+          identifier: 'Some Identifier1',
+          snake_case_key: 'Some value1',
+          camelCaseKey: 'Some other value1',
+          'Title Case Key': 'Some third value',
+        },
+        {
+          identifier: 'Some Identifier2',
+          snake_case_key: 'Some value2',
+          'Title Case Key': 'Some third value',
+        },
+        {
+          identifier: 'Some Identifier3',
+          snake_case_key: 'Some value3',
+          camelCaseKey: 'Some other value3',
+          'Title Case Key': 'Some third value',
+        },
+      ],
+    };
+  },
+  components: {
+    IFCTable,
+    IFCThemeProvider,
+    IFCTableHeader,
+    IFCTableCell,
+  },
+  methods: {
+    handlePageSizeChange(value) {
+      this.currentPageSize = value;
+    },
+    handlePageChange(value) {
+      this.page = value;
+    },
+    handleSizeChange(value) {
+      this.sizing = value;
+    },
+    handleInteractiveCell(item) {
+      // do whatever you want here.
+      console.log(item);
+    },
+    handleSort(header) {
+      if (header === this.activelySortedHeader) {
+        this.sortDirection = this.sortDirection === 'descending' ? 'ascending' : 'descending';
+      } else {
+        this.sortDirection = 'descending';
+      }
+      this.activelySortedHeader = header;
+    },
+    handlePin(header, index) {
+      const cellKey = this.computeKey(header, index);
+      if (this.pinnedCells.includes(cellKey)) {
+        // because vue reactivity can be a little sus at times, I use Vue.set for setting arrays and objects as values
+        this.$set(this, 'pinnedCells', this.pinnedCells.filter((cell) => cell !== cellKey));
+      } else {
+        this.pinnedCells.push(cellKey);
+      }
+    },
+    computeKey(header, index) {
+      return `${index}-${header}`;
+    },
+  },
+  computed: {
+    headers() {
+      const setOfKeys = new Set([]);
+      this.items.forEach((item) => {
+        Object.keys(item).forEach((key) => setOfKeys.add(key));
+      });
+      return Array.from(setOfKeys);
+    },
+    sortedItems() {
+      const items = this.items.slice();
+      items.sort((a, b) => {
+        if (this.sortDirection === 'descending') {
+          if (a[this.activelySortedHeader] > b[this.activelySortedHeader]) {
+            return -1;
+          }
+          if (a[this.activelySortedHeader] > b[this.activelySortedHeader]) {
+            return 1;
+          }
+          return 0;
+        }
+        if (a[this.activelySortedHeader] > b[this.activelySortedHeader]) {
+          return 1;
+        }
+        if (a[this.activelySortedHeader] > b[this.activelySortedHeader]) {
+          return -1;
+        }
+        return 0;
+      });
+      return items;
+    },
+  },
+};
+export default TableContainer;
+</script>
+```

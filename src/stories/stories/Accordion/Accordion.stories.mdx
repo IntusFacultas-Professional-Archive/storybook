@@ -1,0 +1,39 @@
+import { Meta, ArgsTable, SourceContainer } from '@storybook/addon-docs/blocks';
+
+<Meta title="Presentational Components/Layout/Accordion/Usage" />
+
+# Accordion Usage
+
+```html
+<template>
+<IFCThemeProvider>
+  <IFCAccordion :openState="open">
+    <template #title>
+      <IFCButton @click="open = !open" variant="primary" block>Open</IFCButton>
+    </template>
+    <IFCH1>Content in the Accordion</IFCH1>
+    <IFCParagraph>
+      This content will be in the accordion and visible based on accordion toggle state
+    </IFCParagraph>
+  </IFCAccordion>
+</IFCThemeProvider>
+</template>
+
+<script>
+import {IFCThemeProvider, IFCAccordion, IFCButton, IFCH1, IFCParagraph} from '@nasic/component-library/build/index';
+export default {
+  data() {
+    return {
+      open: false,
+    }
+  },
+  components: {
+    IFCThemeProvider,
+    IFCAccordion,
+    IFCButton,
+    IFCH1,
+    IFCParagraph
+  }
+}
+</script>
+```

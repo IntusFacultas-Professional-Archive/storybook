@@ -1,0 +1,44 @@
+@use '../Text/_textConstants' as text;
+@use '../_constants' as constants;
+@use '../_colors' as colors;
+@use '../Input/_inputConstants.scss' as input;
+.IFCCap {
+  // default behavior
+  @include text.DefaultTextStyling;
+  transition: border-color constants.$DefaultTiming ease-out;
+  border-style: constants.$DefaultBorderStyle;
+  display: flex;
+  height: input.$InputHeight;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 1;
+  flex-basis: auto;
+  box-sizing: border-box;
+  padding: .25em 1em;
+  border-width: constants.$DefaultBorderWidth;
+  @include colors.themed() {
+    background-color: colors.retrieveColor('input-endcap');
+    color: colors.retrieveColor('text-normal');
+  }
+
+  // shape variants
+  &--front {
+    border-right-width:0px;
+    margin-right: -1px;
+    border-left-width: constants.$DefaultBorderWidth;
+    border-top-width: constants.$DefaultBorderWidth;
+    border-bottom-width: constants.$DefaultBorderWidth;
+  }
+  &--end {
+    border-right-width: constants.$DefaultBorderWidth;
+    margin-right: -1px;
+    border-left-width: 0;
+    border-top-width: constants.$DefaultBorderWidth;
+    border-bottom-width: constants.$DefaultBorderWidth;
+  }
+  @include input.FieldVariants(&);
+  // disabled state
+  &--disabled {
+    @include input.DisabledInputStyling;
+  }
+}

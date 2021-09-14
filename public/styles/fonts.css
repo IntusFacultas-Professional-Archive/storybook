@@ -1,0 +1,47 @@
+@font-face {
+font-family: "PT Serif Regular";
+src: url("./PT_Serif-Web-Regular.ttf");
+}
+@font-face {
+font-family: "PT Serif Bold";
+src: url("./PT_Serif-Web-Bold.ttf");
+}
+@font-face {
+font-family: "PT Serif Italic";
+src: url("./PT_Serif-Web-Italic.ttf");
+}
+@font-face {
+font-family: "Open Sans Bold";
+src: url("./OpenSans-Bold.eot");
+src: url("./OpenSans-Bold.ttf");
+}
+@font-face {
+font-family: "Open Sans Condensed Bold";
+src: url("./OpenSans-CondBold.eot");
+src: url("./OpenSans-CondBold.ttf");
+}
+@font-face {
+font-family: "Open Sans Condensed Light";
+src: url("./OpenSans-CondLight.eot");
+src: url("./OpenSans-CondLight.ttf");
+}
+@font-face {
+font-family: "Open Sans Italic";
+src: url("./OpenSans-Italic.eot");
+src: url("./OpenSans-Italic.ttf");
+}
+@font-face {
+font-family: "Open Sans Light Italic";
+src: url("./OpenSans-LightItalic.eot");
+src: url("./OpenSans-LightItalic.ttf");
+}
+@font-face {
+font-family: "Open Sans Regular";
+src: url("./OpenSans-Regular.eot");
+src: url("./OpenSans-Regular.ttf");
+}
+@font-face {
+font-family: "Open Sans Semi Bold";
+src: url("./OpenSans-Semibold.eot");
+src: url("./OpenSans-Semibold.ttf");
+}

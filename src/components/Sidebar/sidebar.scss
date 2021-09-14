@@ -1,0 +1,114 @@
+@use '../_constants.scss' as constants;
+@use '../_stacking.scss' as stacking;
+.IFCSidebarBackdrop-enter-active, .IFCSidebarBackdrop-leave-active {
+  transition: opacity .15s ease-out;
+}
+.IFCSidebarBackdrop-enter, .IFCSidebarBackdrop-leave-to {
+  opacity: 0;
+}
+.IFCSidebarCollapse-enter {
+  transform: translateX(-50vw) !important;
+  z-index: -1;
+}
+.IFCSidebarCollapse-leave-to {
+  transform: translateX(-50vw) !important;
+  z-index: -1;
+}
+@mixin FullHeightContent {
+  min-height: 100vh;
+  height: 100%;
+}
+@mixin SidebarPadding {
+  padding: 1em .5em;
+}
+$CollapsedSidebarWidth: 70px;
+.IFCSidebar {
+  min-height: 100vh;
+  display: flex;
+  position: relative;
+  box-sizing: border-box;
+
+  &__button {
+    & svg {
+      fill: var(--IFC-sidebar-button-color) !important;
+      height: 30px;
+      max-width: 30px;
+      box-sizing: border-box;
+    }
+    color: var(--IFC-sidebar-button-color) !important;
+    box-sizing: border-box;
+  }
+
+  &__sidebar {
+    padding: 1em;
+    flex: 1;
+    transition: transform constants.$DefaultTiming ease-out;
+    background-color: var(--IFC-sidebar-background);
+    max-width: var(--IFC-sidebar-width);
+    width: 100vw;
+    height: 100vh;
+    display: none;
+    &--override {
+      display: block;
+    }
+  }
+
+  &__collapsedSidebar {
+    @include SidebarPadding;
+    @include FullHeightContent;
+    box-sizing: border-box;
+    width: $CollapsedSidebarWidth;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: sticky;
+    left: 0;
+    top: 0;
+    z-index: stacking.$CollapsedSidebarTogglerZIndex;
+    background-color: var(--IFC-sidebar-background);
+    display: none;
+    &--override {
+      display: block;
+    }
+  }
+
+  &__toggleableSidebar {
+    @include SidebarPadding;
+    @include FullHeightContent;
+    box-sizing: border-box;
+    position: absolute;
+    top: 0;
+    z-index: stacking.$CollapsedSidebarZIndex;
+    background-color: var(--IFC-sidebar-background);
+    max-width: var(--IFC-sidebar-width);
+    width: 100vw;
+  }
+
+  &__floatedContainer {
+    @include FullHeightContent;
+    position: sticky;
+    left: $CollapsedSidebarWidth;
+    z-index: stacking.$CollapsedSidebarZIndex;
+    top: 0;
+    transition: transform constants.$DefaultTiming ease-out;
+    transform: translateX(0);
+  }
+
+  &__offsetContent {
+    flex: 1;
+    padding: 1em;
+  }
+
+  &__backdrop {
+    backdrop-filter: blur(2px);
+    background-color: rgba(0,0,0, 0.1);
+    z-index: stacking.$CollapsedSidebarBackdropZIndex;
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+  }
+}

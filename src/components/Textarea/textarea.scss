@@ -1,0 +1,28 @@
+@use '../Input/_inputConstants.scss' as input;
+.IFCTextArea {
+  position: relative;
+  margin-left: -2px;
+  width: calc(100% + 2px);
+
+  @include input.InputEndcapContainer() {
+    margin-right: 2px;
+    margin-bottom: 2px;
+  };
+  @include input.InputEndcap() {
+    margin-bottom: 2px;
+    margin-left: 2px;
+  };
+  @include input.FormContainer;
+  @include input.InputSVGContainer;
+  @include input.LabelContainer() {
+    height: calc(100% - 2px);
+    width: calc(100% + 2px);
+  };
+  @include input.FloatedInputBorder;
+
+  &__textarea {
+    @include input.FloatedLabelInput;
+    min-height: input.$InputHeight;
+    resize: vertical;
+  }
+}

@@ -1,62 +1,38 @@
-import '@storybook/addon-console';
+import { addDecorator } from '@storybook/vue'; // <- or your view layer
+import { withTests } from '@storybook/addon-jest';
 
-import { addParameters } from '@storybook/vue';
+import results from '../.jest-test-results.json';
 
-addParameters({
-    viewport: {
-        viewports: {
-            small: {
-                name: "Small",
-                styles: {
-                    height: "1080px",
-                    width: "576px"
-                }
-            },
-            medium: {
-                name: "Medium",
-                styles: {
-                    height: "1080px",
-                    width: "768px"
-                }
-            },
-            large: {
-                name: "Large",
-                styles: {
-                    height: "1080px",
-                    width: "992px"
-                }
-            },
-            xlarge: {
-                name: "Xtra Large",
-                styles: {
-                    height: "1080px",
-                    width: "1200px"
-                }
-            },
-            surfacePro3: {
-                name: "Surface Pro 3",
-                styles: {
-                    height: "1440px",
-                    width: "2160px"
-                },
-                type: "tablet"
-            },
-            surfacePro4: {
-                name: "Surface Pro 4",
-                styles: {
-                    height: "1824px",
-                    width: "2736px"
-                },
-                type: "tablet"
-            },
-            ipad: {
-                name: 'iPad',
-                styles: {
-                    height: '1024px',
-                    width: '768px',
-                },
-                type: "tablet"
-            },
-        },
+addDecorator(
+  withTests({
+    results,
+  })
+);
+
+
+export const parameters = {
+  actions: { argTypesRegex: "^on[A-Z].*" },
+  controls: {
+    matchers: {
+      color: /(background|color)$/i,
+      date: /Date$/,
     },
-});
+  },
+  backgrounds: {
+    default: 'white',
+    values: [
+      {
+        name: 'white',
+        value: '#fff',
+      },
+      {
+        name: 'Dark Mode',
+        value: '#282833'
+      },
+      {
+        name: 'Query Builder',
+        value: '#403F4E',
+      },
+    ],
+  },
+}

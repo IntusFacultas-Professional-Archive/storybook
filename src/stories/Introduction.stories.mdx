@@ -1,0 +1,37 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="Overview/Introduction" />
+
+# Welcome to IFC Storybook
+
+This storybook documents and tests all components that you could reasonably use for any NASIC application. 
+
+## Installation 
+
+You can install the component library this storybook is for with `npm install @nasic/component-library@latest` or `yarn add @nasic/componentlibrary@latest`
+
+## Component Development Paradigm
+
+Components here are split into 2 types of components.
+
+<ul>
+  <li>Presentational</li>
+  <li>Container</li>
+</ul>
+
+## Presentational
+
+Presentational components are concerned only with the displaying of data to the UI and allowing the user to interact
+with the data.
+
+They don't concern themselves with data fetching, data validation, or data mutation. They receive the data through
+props, have their behavior configured through props and slots, and pass all events back up to <b>Container</b>
+components.
+
+## Container
+
+Container components are concerned only with the fetching, validation, and mutation of data. They defer displaying
+the data to their child <b>Presentational</b> components. Container components are hooked into a Vuex store.
+
+They listen to events bubbling up from their child <b>Presentational</b> components for detecting when the user wishes
+to mutate data.

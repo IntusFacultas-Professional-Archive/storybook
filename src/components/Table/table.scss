@@ -1,0 +1,275 @@
+
+@use '../Text/_textConstants' as text;
+@use '../_stacking.scss' as stacking;
+@use '../_colors.scss' as colors;
+
+$horizontalClearance: 1em;
+$condensed: 0.25em;
+$regular: 0.5em;
+$relaxed: 0.75em;
+
+@mixin InteractiveCellStyling {
+  cursor: pointer;
+  & * {
+    cursor: pointer !important;
+  }
+  transition: background-color .2s ease-out;
+}
+
+@mixin VisualBugFix {
+  & > div > span, & > div.IFCtablecell--externalcontent {
+    /** this is incredibly hacky, but its 05:00 and I've been working on this since 06:00 of yesterday without
+    success. The cells have to have a right padding of 0 so that the resize handle is appropriately situated
+    at the corner, but we want to have visual space similar to the padding, particularly for right-aligned cells
+    so we select the span that encirculates the slot and give it a right margin to match the expected padding.*/
+    margin-right: $horizontalClearance;
+  }
+}
+
+
+@mixin BorderManager {
+  border-bottom-width: 0px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: -2px;
+  border-width: 0px;
+  border-bottom-width: 2px;
+  border-style: solid;
+  pointer-events: none;
+  z-index: stacking.$BuriedContentZIndex;
+  @include colors.themed() {
+    border-color: colors.retrieveColor('table-border');
+  }
+}
+$BorderManagerClassName: 'IFCTableBorderManager';
+.#{$BorderManagerClassName} {
+  @include BorderManager();
+}
+.IFCTableCellButton {
+  background: transparent;
+  border: 0;
+  padding: 0;
+  font-weight: inherit;
+  font-size: inherit;
+  flex: 1;
+  font-family: inherit;
+  color: inherit;
+}
+.IFCTableResizeableWrapper {
+
+  overflow: visible;
+  width: 100%;
+  padding-right: $horizontalClearance;
+  display: flex;
+  flex-wrap: nowrap;
+
+  &--resizeable {
+    overflow: auto;
+    resize: horizontal;
+    box-sizing: border-box;
+    display: inline-block;
+    width: 100%;
+    // margin-right: -$horizontalClearance;
+    // padding-right: 0;
+    padding-bottom: .75em;
+    &--condensed {
+      margin-bottom: ($condensed + 0.25em) * -1;
+    }
+    &--regular {
+      margin-bottom: ($regular + 0.25em) * -1;
+    }
+    &--relaxed {
+      margin-bottom: ($relaxed + 0.25em) * -1;
+    }
+  }
+}
+
+@mixin PinnedVariant($CellOrHeaderZIndex) {
+  &--pinned {
+    z-index: $CellOrHeaderZIndex;
+    position: sticky;
+    & > div.#{$BorderManagerClassName} {
+      border-left-width: 1px;
+      border-right-width: 1px;
+    }
+  }
+}
+
+@mixin CellVariants($cellOrHeader) {
+  // sizing variants
+  &--condensed {
+    padding: .5em 0em $condensed $horizontalClearance;
+  }
+  &--regular {
+    padding: 1em 0em $regular $horizontalClearance;
+  }
+  &--relaxed {
+    padding: 1.25em 0em $relaxed $horizontalClearance;
+  }
+
+  // non-color variants
+  
+  &--grid {
+    border-left-width: 1px;
+    border-left-style: solid;
+    border-right-width: 1px;
+    border-right-style: solid;
+  }
+  &--fitContent {
+    width: 1% !important;
+  }
+
+  // color variants
+  &--default {
+    @include colors.themed() {
+      background-color: colors.retrieveColor('table-#{$cellOrHeader}-background-default');
+    }
+    &--interactive {
+      @include InteractiveCellStyling();
+      @include colors.themed() {
+        &:hover {
+          background-color: colors.retrieveColor('table-#{$cellOrHeader}-background-hover');
+        }
+      }
+    }
+  }
+  &--success {
+    @include colors.themed() {
+      background-color: colors.retrieveColor('table-#{$cellOrHeader}-success-default');
+      color: colors.retrieveColor('table-#{$cellOrHeader}-success-color');
+    }
+    &--interactive {
+      @include InteractiveCellStyling();
+      @include colors.themed() {
+        &:hover {
+          background-color: colors.retrieveColor('table-#{$cellOrHeader}-success-hover');
+        }
+      }
+    } 
+  }
+  &--danger {
+    @include colors.themed() {
+      background-color: colors.retrieveColor('table-#{$cellOrHeader}-danger-default');
+      color: colors.retrieveColor('table-#{$cellOrHeader}-danger-color');
+    }
+    &--interactive {
+      @include InteractiveCellStyling();
+      @include colors.themed() {
+        &:hover {
+          background-color: colors.retrieveColor('table-#{$cellOrHeader}-danger-hover');
+        }
+      }
+    }
+  }
+  &--info {
+    @include colors.themed() {
+      background-color: colors.retrieveColor('table-#{$cellOrHeader}-info-default');
+      color: colors.retrieveColor('table-#{$cellOrHeader}-info-color');
+    }
+    &--interactive {
+      @include colors.themed() {
+        &:hover {
+          background-color: colors.retrieveColor('table-#{$cellOrHeader}-info-hover');
+        }
+      }
+      @include InteractiveCellStyling();
+    }
+  }
+}
+
+
+.IFCTable {
+  display: flex;
+  flex-direction: column;
+  &__activeFilters {
+    width: 100%;
+    margin-bottom: 1em;
+    box-sizing: border-box;
+  }
+  &__configurationSpacer {
+    display: flex;
+    & > button  {
+      margin-left: 1em;
+    }
+  }
+  &__tableContainer {
+    position: relative;
+  }
+  &__table {
+    width: 100%;
+    border-collapse: collapse;
+    box-shadow: 0px 4px 4px 2px rgba(0,0,0, 0.05);
+    &--outlined {
+      @include colors.themed() {
+        border: 1px solid colors.retrieveColor('table-border');
+      }
+    }
+    thead {
+      position: relative;
+    }
+    tr {
+      position: relative;
+    }
+  }
+  &__tbody {
+    &--striped {
+      & tr:nth-child(even) td, & tr:nth-child(even) th {
+        @include colors.themed() {
+          box-shadow: inset 0 0 206px 1px colors.retrieveColor('table-striped');
+        }
+      }
+    }
+    &--hoverable {
+      & tr:hover {
+        & td, & th {
+          @include colors.themed() {
+            box-shadow: inset 0 0 206px 1px colors.retrieveColor('table-hover');
+          }
+        }
+      }
+    }
+  }
+  &__twoColumnArea {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 1em;
+    height: 40px;
+    align-items:center;
+  }
+}
+
+.IFCTableHeader {
+  @include text.DefaultTextStyling;
+  z-index: stacking.$TableHeaderZIndex;
+  position: sticky;
+  font-size: 18px;
+  border-bottom-width: 2px;
+  border-top-width: 1px;
+  border-top-style: solid;
+  font-weight: bold;
+
+  @include colors.themed() {
+    border-color: colors.retrieveColor('table-border');
+    color: colors.retrieveColor('text-normal');
+  }
+  @include PinnedVariant(stacking.$PinnedTableHeaderZIndex);
+  @include VisualBugFix;
+  @include CellVariants('header')
+}
+
+.IFCTableCell {
+  @include text.DefaultTextStyling;
+  position: relative;
+  border-bottom-width: 1px;
+  border-bottom-style: solid;
+  @include colors.themed() {
+    border-color: colors.retrieveColor('table-border');
+    color: colors.retrieveColor('text-normal');
+  }
+  @include PinnedVariant(stacking.$PinnedTableCellZIndex);
+  @include VisualBugFix;
+  @include CellVariants('cell')
+}

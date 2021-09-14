@@ -1,0 +1,46 @@
+import { Meta, ArgsTable } from '@storybook/addon-docs/blocks';
+// import {Title} from '@storybook/addon-docs';
+
+<Meta title="'Presentational Components/Form Components/Radio/Usage" />
+
+# IFC Radio
+
+
+```html
+<template>
+  <IFCThemeProvider :dark="false">
+    <IFCRadio @change="handleChange" value="Apples" :checked="value === 'Apples'" name="FavoriteFruit" >
+      Apples
+    </IFCRadio>
+    <IFCRadio @change="handleChange" value="Bananas" :checked="value ==='Bananas'"  name="FavoriteFruit">
+      Bananas
+    </IFCRadio>
+    <IFCRadio @change="handleChange" value="Kiwis" :checked="value === 'Kiwis'" name="FavoriteFruit" >
+      Kiwis
+    </IFCRadio>
+  </IFCThemeProvider>
+</template>
+
+<script>
+import {
+  IFCRadio, IFCThemeProvider,
+} from '@nasic/component-library/build/index.esm';
+
+export default {
+  data() {
+    return {
+      value: '',
+    };
+  },
+  components: {
+    IFCRadio,
+    IFCThemeProvider,
+  },
+  methods: {
+    handleChange(value) {
+      this.value = value;
+    },
+  },
+};
+</script>
+```

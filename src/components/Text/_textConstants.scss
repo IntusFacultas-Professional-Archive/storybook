@@ -1,0 +1,38 @@
+@mixin DefaultFont {
+  font-family: "Open Sans Regular", "Segoe UI", Tahoma, Geneva, Verdana,
+    sans-serif;
+}
+@mixin BoldFont {
+  font-weight: bold;
+}
+@mixin ScreenReaderOnlyStyling {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+
+$NormalTextSize: 1em;
+
+@mixin TitleStyling {
+  @include DefaultFont;
+  margin-bottom: 0.5em;
+}
+@mixin DefaultTextStyling {
+  @include DefaultFont;
+  font-size: $NormalTextSize;
+}
+
+@mixin DisableHighlighting {
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Old versions of Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome, Edge, Opera and Firefox */
+}

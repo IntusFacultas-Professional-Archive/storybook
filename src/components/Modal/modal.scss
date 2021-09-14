@@ -1,0 +1,85 @@
+@use '../Text/_textConstants' as text;
+@use '../_constants.scss' as constants;
+@use '../_stacking.scss' as stacking;
+@use '../_colors.scss' as colors;
+.IFCModalBackdrop-enter-active, .IFCModalBackdrop-leave-active {
+  transition: opacity .15s ease-out;
+}
+.IFCModalBackdrop-enter, .IFCModalBackdrop-leave-to {
+  opacity: 0;
+}
+.IFCModal-enter-active, .IFCModal-leave-active {
+  transition: transform .15s ease-out;
+}
+.IFCModal-enter, .IFCModal-leave-to {
+  transform: translateY(-30px);
+}
+.IFCModal {
+  &--hidden {
+    pointer-events: none;
+  }
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  width: 100vw;
+  overflow: auto;
+  display: flex;
+  justify-content: center;
+  padding: 2em;
+  box-sizing: border-box;
+  max-height: 100vh;
+  z-index: stacking.$ModalBackdropZIndex;
+
+  &__backdrop {
+    backdrop-filter: blur(2px);
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    height: 100vh;
+    width: 100vw;
+    @include colors.themed() {
+      background-color: colors.retrieveColor('modal-backdrop');
+    }
+  }
+
+  &__titleContainer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  &__title {
+    font-size: 20px;
+    margin: 0;
+    @include text.DefaultFont;
+    @include colors.themed() {
+      color: colors.retrieveColor('text-normal');
+    }
+  }
+
+  &__section {
+    padding: 1em;
+    box-sizing: border-box;
+  }
+
+  &__closeButton {
+    padding: .5em;
+  }
+
+  &__modal {
+    z-index: stacking.$ModalZIndex;
+    width: 100%;
+    border: 1px solid transparent;
+    border-radius: constants.$DefaultBorderRadius;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    @include colors.themed() {
+      background-color: colors.retrieveColor('background');
+      box-shadow: 0px 2px 4px 2px colors.retrieveColor('modal-backdrop');
+    }
+  }
+}

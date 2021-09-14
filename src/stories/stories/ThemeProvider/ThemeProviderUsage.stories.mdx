@@ -1,0 +1,110 @@
+import { Meta, ArgsTable, SourceContainer } from "@storybook/addon-docs/blocks";
+
+<Meta title="Theming/Usage" />
+
+# Theming
+
+## Background
+
+This component library is agnostic to any framework. All the styling is done in vanilla SCSS. However there are a few
+important gotchas you need to be aware of.
+
+1. Every component is responsible for importing _only_ its own styling. What this means is that if you import a
+   component that uses _another_ component, the dependency will not have its styling imported by default. We explain how
+   to solve this below.
+2. For maintainers of this project, you will notice that there are SCSS files separate from every Vue SFC which get
+   imported into the Vue SFC. This is intentional, and you should continue to follow this convention to avoid having your
+   components fail to load styling due to point 1.
+
+### Loading Dependency Styling.
+
+There are two ways to solve the problem of dependency styling being unloaded. The first is the **recommended** way,
+the second is a more labor intensive way that results in a slightly smaller production bundle.
+
+1. The easiest way is to import `IFCThemeProvider` and wrap your project in the theme provider. We talk more about
+   what this does further down, but the short and sweet version is that the ThemeProvider provides a SCSS file that has
+   all the SCSS files for all the components imported, so no matter which component you import, the ThemeProvider will have
+   styling for it and all it's dependencies.
+2. If you want to avoid having to import the ThemeProvider (for example, because you don't intend to use many components
+   and feel that it would be a waste to have the ThemeProvider import the rest of the SCSS for the rest of the components,
+   you can manully import each additional dependency component that your main components need, as importing them will also
+   `import` their styling.)
+
+## IFCThemeProvider
+
+The IFCThemeProvider does two important jobs.
+
+1. It binds a class to itself `theme--default` or `theme--dark` to toggle dark mode and light mode (how this is
+   implemented will be discussed below). All descendent components draw the styling based on whether they are a child of
+   `theme--default` or `theme--dark`.
+2. It imports every single component's SCSS into its own SCSS file that gets transpiled for use into one big CSS file,
+   ensuring that all components and their dependencies have their styling present.
+
+### How Dark Mode and Light Mode works.
+
+In the `_colors.scss` partial file, there is a map that contains two themes, `default` and `dark`. The themes _must_
+be symmetrical to avoid issues, but there is no way for me to programmatically enforce that. **You** as the maintainer
+must be disciplined and keep that consistent. When a component wants to style itself with a color that is dark mode or
+light mode theme dependent, it utilizes a mixin `themed()` that is defined in the same file, which causes the styling to
+be depedent on the active theme (essentially it does something like `.theme--default .ThemedComponent {color: black})`
+and `.theme--dark .ThemedComponent {color: white}` in the CSS)
+
+The `themed()` mixin provides access to a SCSS `function` called `retrieveColor` which a consumer downstream uses to
+retrieve a color from the currently active map (default or dark). At transpile time, the retrieveColor generates two
+stylings as demonstrated above, branched by default and dark. This allows the entire styling to change just based on
+the ThemeProvider, without having to change classes for all descendent components.
+
+### How to use the ThemeProvider
+
+```html
+<template>
+  <IFCThemeProvider :dark="dark">
+    <!-- Your Project In Here -->
+  </IFCThemeProvider>
+</template>
+
+<script>
+  import { IFCThemeProvider } from "@intusfacultas/component-library/build/index.esm";
+  export default {
+    components: {
+      IFCThemeProvider,
+    },
+    data() {
+      return {
+        dark: false, // toggle to true for dark mode
+      };
+    },
+  };
+</script>
+```
+
+### Developing your own components.
+
+When you're developing your components, I'd recommend keeping several things in mind.
+
+1. Consider whether colors are dark mode dependent or shared by more than one component. If so, add them to the
+   `_colors.scss` partial, and import the partial at the top of the Vue SFC style tag as such:
+
+```html
+<style lang="scss">
+  @use '../relative/path/to/_colors.scss' as colors;
+
+  .MyClass {
+    color: colors.$MyCustomColor;
+    @include colors.themed() {
+      background-color: colors.retrieveColor(
+        "backgroud"
+      ); // This is dark mode dependent!
+    }
+  }
+</style>
+```
+
+2. Don't write SCSS inside of the `<style>` tag in your Vue SFC unless you intend for it only to be loaded if the
+   component itself is loaded directly by the developer consuming this library. (there are valid reasons to do this.
+   For example, the NASIC Link Navbar adds a margin to the body in IE when the component is loaded, but it doesn't make
+   sense to have that margin present when the LINK Navbar isn't present to fill that margin, so that exists only in the `<style>` tag.)
+
+Instead you should write a separate `MyComponent.scss` file which you can then `@import` into your Vue SFC `<style>`
+area. The reason you should do this is because you'll also want to import your scss file in the `ThemeProvider/theme.scss`
+file so that components that use your component as a dependency have your component style loaded by ThemeProvider.

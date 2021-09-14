@@ -1,0 +1,57 @@
+import { Meta, ArgsTable, SourceContainer } from '@storybook/addon-docs/blocks';
+
+<Meta title="Container Components/Tree Query Builder/Usage" />
+
+# Tree Query Builder Usage
+
+**Note:** This component does not work in IE.
+
+```html
+<template>
+<IFCThemeProvider :dark="dark">
+  <IFCTreeQueryBuilder
+    @change="handleChange"
+    @valid="onValidityChange"
+    :operators="operators"
+    :listOperators="listOperators"
+    :value="value" />
+</IFCThemeProvider>
+</template>
+
+<script>
+import { IFCThemeProvider, IFCTreeQueryBuilder } from '@nasic/component-library/build/index.esm';
+
+export default {
+  components: {
+    IFCThemeProvider,
+    IFCTreeQueryBuilder,
+  },
+  data() {
+    return {
+      operators: [
+        'EQUALS',
+        'GREATER THAN',
+        'LESS THAN',
+        'NOT IN',
+        'IN',
+      ],
+      listOperators: [
+        'NOT IN',
+        'IN',
+      ],
+      dark: false,
+      valid: false,
+      value: {},
+    };
+  },
+  methods: {
+    handleChange(value) {
+      this.value = value;
+    },
+    onValidityChange(valid) {
+      this.valid = valid;
+    },
+  },
+};
+</script>
+```

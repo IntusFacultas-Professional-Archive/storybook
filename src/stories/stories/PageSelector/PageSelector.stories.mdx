@@ -1,0 +1,31 @@
+import { Meta, ArgsTable, SourceContainer } from '@storybook/addon-docs/blocks';
+
+<Meta title="Presentational Components/Pagination/Page Selector/Usage" />
+
+# Page Selector
+
+```html
+<template>
+<IFCThemeProvider >
+  <IFCPageSelector @change="page = $event" :value="page" :pages="pages" />
+</IFCThemeProvider>
+</template>
+
+<script>
+import { IFCThemeProvider, IFCPageSelector } from '@nasic/component-library/build/index.esm';
+
+export default {
+  components: {
+    IFCThemeProvider,
+    IFCPageSelector,
+  },
+  data() {
+    return {
+      page: 1,
+      pages: 20,
+    };
+  },
+};
+</script>
+
+```

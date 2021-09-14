@@ -1,0 +1,9 @@
+@use '../_constants.scss' as constants;
+@mixin FormSpacing {
+  & > div:not(:first-of-type) {
+    margin-top: constants.$DefaultFormVerticalSpacing;
+  }
+}
+.IFCForm {
+  @include FormSpacing;
+}

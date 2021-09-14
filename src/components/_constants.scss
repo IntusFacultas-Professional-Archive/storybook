@@ -1,0 +1,12 @@
+$DefaultBorderWidth: 2px;
+$DefaultBorderStyle: solid;
+$DefaultBorderRadius: 3px;
+$DefaultFormVerticalSpacing: 1em;
+$DefaultTiming: 0.2s;
+$DisabledOpacity: .7;
+
+@mixin RoundedElementStyling {
+  border-width: $DefaultBorderWidth;
+  border-radius: $DefaultBorderRadius;
+  border-style: $DefaultBorderStyle;
+}

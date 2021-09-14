@@ -1,0 +1,38 @@
+// Add all SCSS imports here so that SSR works properly.
+@use '../Text/text' as text;
+@import '../Accordion/accordion.scss';
+@import '../Alert/alert.scss';
+@import '../Button/button.scss';
+@import '../Button/buttonGroup.scss';
+@import '../Cap/cap.scss';
+@import '../Card/card.scss';
+@import '../Dropdown/dropdown.scss';
+@import '../Form/form.scss';
+@import '../Input/input.scss';
+@import '../Modal/modal.scss';
+@import '../MultiStageLoader/multiStageLoader.scss';
+@import '../Navbar/navbar.scss';
+@import '../Pagination/IFCPageSelector/pageSelector.scss';
+@import '../Pagination/IFCPageSizeSelector/pageSizeSelector.scss';
+@import '../Radio/radio.scss';
+@import '../Sidebar/sidebar.scss';
+@import '../SlideFilter/slideFilter.scss';
+@import '../Table/ActionsDropdown/actionsDropdown.scss';
+@import '../Table/SpacingSelector/spacingSelector.scss';
+@import '../Table/table.scss';
+@import '../TableOfContents/toc.scss';
+@import '../TagEditor/tagEditor.scss';
+@import '../Textarea/textarea.scss';
+@import '../TreeQueryBuilder/tree.scss';
+
+@include text.Span;
+@include text.Small;
+@include text.ScreenReader;
+@include text.Paragraph;
+@include text.Label;
+@include text.H6;
+@include text.H5;
+@include text.H4;
+@include text.H3;
+@include text.H2;
+@include text.H1;

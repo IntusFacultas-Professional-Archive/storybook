@@ -1,0 +1,21 @@
+.IFCTablePin {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  &__button {
+    opacity: 0.4;
+    background-color: transparent;
+    border: 0px;
+    padding: .1em;
+    display: flex;
+    justify-content: center;
+    cursor: pointer;
+    align-items: center;
+    &:hover {
+      opacity: 1.0;
+    }
+    &--pinned {
+      opacity: 1;
+    }
+  }
+}

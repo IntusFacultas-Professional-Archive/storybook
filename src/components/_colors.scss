@@ -1,0 +1,349 @@
+$primary: #065C7D;
+$info: #00DCC6;
+$danger: #E51950;
+$success: #00b307;
+$focus: #23b1e8;
+$warning: #FFD24B;
+$background: white;
+$text-normal: #444;
+
+
+$AirBlue: #2999F4;
+$LightBlue: #41BEE8;
+$MissileOrange: #FF7200;
+$CyberYellow: #F7C82C;
+$RegionGreen: #C8E552;
+$SpaceTeal: #0AD1C3;
+$INTsMagneta: #FC49C9;
+
+$linkMap: (
+  AirBlue: $AirBlue,
+  MissileOrange: $MissileOrange,
+  CyberYellow: $CyberYellow,
+  RegionGreen: $RegionGreen,
+  SpaceTeal: $SpaceTeal,
+  INTsMagenta: $INTsMagneta,
+  LightBlue: $LightBlue,
+  More: $LightBlue,
+);
+
+$themes: (
+  default: (
+    // text colors
+    text-normal: #444,
+    text-inverse: white,
+    text-dark: #444,
+    text-white: white,
+    text-disabled: #444,
+    
+
+    // universal colors
+    primary: #065C7D,
+    info: #00DCC6,
+    danger: #E51950,
+    success: #00b307,
+    focus: #23b1e8,
+    warning: #FFD24B,
+    background: white,
+    border: #444,
+    transparent-hover: rgba(0,0,0, 0.1),
+
+    // query badge colors
+    operator-background: #601E5A,
+    operator-border: #F51DDF,
+    parameter-background: #0D585B,
+    parameter-border: #0AFFFF,
+    node-background: #675601,
+    node-border: #FFBB00,
+    returnValue-background: #276A27,
+    returnValue-border: #07FF07,
+
+    // accordion colors
+    accordion-underline: #f1f1f1,
+
+    // input colors
+    input-endcap: #f5f5f5,
+    input-focus: #23b1e8,
+    input-success: #00b307,
+    input-danger: #E51950,
+    input-disabled: #b9b9b9,
+
+    // card colors
+    card-background: white,
+    card-border: #f1f1f1,
+    card-boxShadow: 0 2px 4px 1px rgba(0,0,0,0.05),
+
+    // inset table colors
+    insetTable-background: #f3f3f3,
+    insetTable-boxShadow: inset 0px 0px 2px 2px rgb(0 0 0 / 5%),
+
+    // classification banner colors
+    classificationBanner-background: #000,
+
+    // bordered accordion colors
+    nester-blue: #074864,
+    nester-green: #057676,
+    nester-pink: #8E67BE,
+    nester-red: #C61561,
+    nester-collapsing: #dedede,
+
+    // modal colors
+    modal-backdrop: rgba(0,0,0, 0.1),
+
+    // pagination colors
+    pagination-boxShadow: 0px 0px 4px 2px rgba(0,0,0, 0.1),
+
+    // querybuilder colors
+    queryBuilder-background: #403F4E,
+    queryBuilder-border: #6FA5F5,
+    queryBuilder-fill: #E6FF04,
+    queryBuilder-button: #252A2C,
+    queryBuilder-hover: #161819,
+    queryBuilder-boxShadow: rgb(111 165 245 / 28%),
+
+    // graph editor colors
+    graphEditor-background: #403F4E,
+    graphEditor-menuHeader: #07F6DE,
+
+    // radio colors
+    radio-boxShadow: rgba(0,0,0, 0.1),
+
+    // relationship colors
+    relationship-background: #C5EFF9,
+    relationship-border: #B3B7B8,
+
+    // spacing selector colors
+    spacingSelector-boxShadow: rgba(0,0,0, 0.1),
+
+    // map filter colors
+    mapFilter-svg: #3a3a3a,
+    mapFilter-border: #444,
+
+    // table colors
+    table-border: #f1f1f1,
+    table-striped: rgba(0,0, 0, 0.05),
+    table-hover: rgba(0,0, 0, 0.1),
+
+    table-header-background-default: white,
+    table-header-background-hover: #f1f1f1,
+    
+    table-header-success-default: #bef5c1,
+    table-header-success-hover: #b1deb3,
+    table-header-success-color: #444,
+    
+    table-header-danger-default: #fbaeae,
+    table-header-danger-hover: #ff9494,
+    table-header-danger-color: #444,
+    
+    table-header-info-default: #00DCC6,
+    table-header-info-hover: #05cab6,
+    table-header-info-color: #444,
+    
+    table-cell-boxShadow: rgba(0,0,0, 0.05),
+    table-cell-background-default: white,
+    table-cell-background-hover: #f1f1f1,
+    table-cell-background-color: #444,
+    
+    table-cell-success-default: #bef5c1,
+    table-cell-success-hover: #b1deb3,
+    table-cell-success-color: #444,
+    
+    table-cell-danger-default: #fbaeae,
+    table-cell-danger-hover: #ff9494,
+    table-cell-danger-color: #444,
+    
+    table-cell-info-default: #00DCC6,
+    table-cell-info-hover: #05cab6,
+    table-cell-info-color: #444,
+
+    // dropdown colors
+    dropdown-border: #CBCBCB,
+    dropdown-background: #403F4E,
+    dropdown-selected: #403F4E,
+    dropdown-text: white,
+    dropdown-hover: #292831,
+    dropdown-shadow: 0px 2px 4px 2px rgba(0,0,0,0.2),
+    dropdown-select: #00FFE5,
+    dropdown-selectedBorder: transparent,
+    dropdown-deselect: #FF5A86,
+    dropdown-selectText: #444444,
+    dropdown-deselectText: white,
+
+    // tree query builder colors
+    tree-query-builder-error: #feeeee,
+
+  ),
+  dark: (
+    // text colors
+    text-normal: white,
+    text-inverse: #444,
+    text-dark: #444,
+    text-white: white,
+    text-disabled: #d6d6d6,
+
+    // universal colors
+    background: #282833,
+    info: #00DCC6,
+    primary: #23b1e8,
+    focus: #23b1e8,
+    danger: #f2688d,
+    success: #6bf270,
+    warning: #FFD24B,
+    border: white,
+    transparent-hover: rgba(0,0,0, 0.3),
+
+    // query badge colors
+    operator-background: #601E5A,
+    operator-border: #F51DDF,
+    parameter-background: #0D585B,
+    parameter-border: #0AFFFF,
+    node-background: #675601,
+    node-border: #FFBB00,
+    returnValue-background: #276A27,
+    returnValue-border: #07FF07,
+
+    // accordion colors
+    accordion-underline: #f1f1f1,
+
+    // input colors
+    input-endcap: #3f3f56,
+    input-focus: #23b1e8,
+    input-success: #6bf270,
+    input-danger: #f2688d,
+    input-disabled: #4c4c4c,
+
+    // card colors
+    card-background: #4b4456,
+    card-border: #121217,
+    card-boxShadow: 0 2px 4px 1px rgb(101 101 101 / 15%),
+
+    // inset table colors
+    insetTable-background: #110c1f,
+    insetTable-boxShadow: inset 0px 0px 2px 2px rgb(0 0 0 / 5%),
+
+    // classification banner colors
+    classificationBanner-background: #000,
+
+    // bordered accordion colors
+    nester-blue: #074864,
+    nester-green: #057676,
+    nester-pink: #8E67BE,
+    nester-red: #C61561,
+    nester-collapsing: #4b4456,
+
+    // modal colors
+    modal-backdrop: rgba(255,255,255, 0.1),
+
+    // pagination colors
+    pagination-boxShadow: 0px 0px 4px 2px rgba(255,255,255, 0.1),
+
+    // querybuilder colors
+    queryBuilder-background: #403F4E,
+    queryBuilder-border: #6FA5F5,
+    queryBuilder-fill: #E6FF04,
+    queryBuilder-button: #252A2C,
+    queryBuilder-hover: #161819,
+    queryBuilder-boxShadow: rgb(111 165 245 / 28%),
+
+    // graph editor colors
+    graphEditor-background: #403F4E,
+    graphEditor-menuHeader: #00563e,
+
+    // radio colors
+    radio-boxShadow: rgba(255,255,255, 0.8),
+
+    // relationship colors
+    relationship-background: #C5EFF9,
+    relationship-border: #B3B7B8,
+
+    // spacing selector colors
+    spacingSelector-boxShadow: rgba(0,0,0, 0.3),
+
+    // map filter colors
+    mapFilter-svg: #0c0d13,
+    mapFilter-border: #0c0d13,
+
+    // table colors
+    table-border: #121217,
+    table-striped: rgba(0,0, 0, 0.2),
+    table-hover: rgba(0,0, 0, 0.3),
+
+    table-header-background-default: #78737f,
+    table-header-background-hover: #66606f,
+
+    table-header-success-default: #bef5c1,
+    table-header-success-hover: #b1deb3,
+    table-header-success-color: #444,
+
+    table-header-danger-default: #fbaeae,
+    table-header-danger-hover: #ff9494,
+    table-header-danger-color: #444,
+
+    table-header-info-default: #00DCC6,
+    table-header-info-hover: #05cab6,
+    table-header-info-color: #444,
+
+    table-cell-boxShadow: rgba(0,0,0, 0.3),
+
+    table-cell-background-default: #78737f,
+    table-cell-background-hover: #66606f,
+
+    table-cell-success-default: #bef5c1,
+    table-cell-success-hover: #b1deb3,
+    table-cell-success-color: #444,
+
+    table-cell-danger-default: #fbaeae,
+    table-cell-danger-hover: #ff9494,
+    table-cell-danger-color: #444,
+    
+    table-cell-info-default: #00DCC6,
+    table-cell-info-hover: #05cab6,
+    table-cell-info-color: #444,
+
+    // dropdown colors
+
+    dropdown-border: #CBCBCB,
+    dropdown-background: #403F4E,
+    dropdown-selected: white,
+    dropdown-text: white,
+    dropdown-hover: #292831,
+    dropdown-shadow: 0px 2px 4px 2px rgba(0,0,0,0.2),
+    dropdown-selectedBorder: white,
+    dropdown-select: #00FFE5,
+    dropdown-deselect: #FF5A86,
+    dropdown-selectText: #444444,
+    dropdown-deselectText: white,
+
+    // tree query builder colors
+    tree-query-builder-error: #3b1717,
+  ),
+);
+
+
+/**
+* For additional context on what this is doing, refer to this: 
+* https://medium.com/@katiemctigue/how-to-create-a-dark-mode-in-sass-609f131a3995
+* The themed mixin iterates through all of your $themes and for that theme defines a global Sass map called $theme-map
+*/
+@mixin themed() {
+  @each $theme, $map in $themes {
+    .theme--#{$theme} & {
+      $theme-map: () !global;
+      @each $key, $submap in $map {
+        $value: map-get(map-get($themes, $theme), '#{$key}');
+        $theme-map: map-merge($theme-map, ($key: $value)) !global;
+      }
+      @content;
+      $theme-map: null !global;
+    }
+  }
+}
+
+@function retrieveColor($key) {
+  @return map-get($theme-map, $key);
+}
+
+
+@function retrieveLinkColor($key) {
+  @return map-get($linkMap, $key);
+}

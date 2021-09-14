@@ -1,0 +1,82 @@
+@use './inputConstants' as input;
+
+
+/**
+ * Explanation of how these borders actually work:
+ *
+ * There are three border elements. Left, Label, and Right. They float above the input element, which is positioned
+ * underneath them, and they position themselves at the extreme borders of the input.
+ *
+ * The left border renders a border like so:
+ *  _____
+ * |
+ * |
+ * |_____
+ *
+ * and never changes. It is a fixed width, and will only change the border color.
+ *
+ * The label border renders a borders above and below the label, and contains the label. When not focused or filled
+ * it renders like so
+ *
+ * ________________________
+ *
+ * {{nontTransformedLabel}}
+ * ________________________
+ *
+ * However, when the input is focused, or has a non-empty value, the label is has a transform applied to it that
+ * scales it down and translates it up, and the border element deletes the upper border, so it renders like so
+ *
+ * {{transformedLabel}}
+ *
+ * ________________________
+ *
+ * Finally there is the right border, which grows to fill the remaining space not taken up by the left and
+ * label borders. When the input is not focused or filled it looks like this
+ *
+ * _______________________________________
+ *                                        |
+ *                                        |
+ * _______________________________________|
+ *
+ * However, when the focus is filled, the label border applies a negative right margin that is calculated based
+ * on the difference between the non-transformed width of the label, and the transformed width of the label.
+ * (This negative right margin is managed in JavaScript, not in CSS)
+ * That negative margin causes the right border to clip into the label border (while still growing to fill the
+ * rest of the input) which causes the right margin to appear to appropriately enclose the transformed label.
+ *
+ * In order to illustrate this, here is an unfocused element with plus (+) signs indicating the ends of the label border
+ * and asterisks (*) indicating the ends of the right border.
+ *
+ *  ______+____________+*___________________________
+ * |                                                |
+ * |       unanimdLabel                             |
+ * |______+____________+*___________________________|
+ *
+ * And here is the same again, but with the input focused or with content inside.
+ *
+ *  ______+animdLabel*_+____________________________
+ * |                                                |
+ * |                                                |
+ * |______+__________*_+____________________________|
+ */
+ 
+ .IFCInput {
+   position: relative;
+   width: 100%;
+ 
+   &__input {
+     @include input.FloatedLabelInput;
+   }
+ 
+   @include input.InputSVGContainer;
+ 
+   @include input.InputEndcapContainer;
+ 
+   @include input.LabelContainer;
+ 
+   @include input.FormContainer;
+ 
+   @include input.InputEndcap;
+ 
+   @include input.FloatedInputBorder;
+ }

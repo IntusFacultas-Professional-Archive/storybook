@@ -1,0 +1,91 @@
+import { Meta } from "@storybook/addon-docs/blocks";
+
+<Meta title="Overview/How to Use" />
+
+# How to use this Storybook
+
+## Nuxt Integration
+
+1. Make sure to include in your `nuxt.config.js` the following bit of code:
+
+```js
+build: {
+    transpile: [
+      '@intusfacultas/component-library',
+      'vue-runtime-helpers/dist/inject-style/server.mjs',
+    ],
+    vendor: [
+      'vue-svg-pan-zoom'
+    ]
+  }
+```
+
+2. Include this script in the `<head>` of your template HTML file which can be found in `.nuxt/views/app.template.html`.
+
+For JWICS and SIPR you'll need to download the file and include it locally. This polyfills CSS vars for IE11.
+
+```html
+<script>
+  window.MSInputMethodContext &&
+    document.documentMode &&
+    document.write(
+      '<script src="https://cdn.jsdelivr.net/gh/nuxodin/ie11CustomProperties@4.1.0/ie11CustomProperties.min.js"><\/script>'
+    );
+</script>
+```
+
+3. Ensure you include the OpenSans fonts in your project. If necessary, you can rip them from this project. They can be found in `public/styles/fonts.css`.
+
+## Stories
+
+Components implemented in this Storybook get `stories`. Each `story` is a meaningfully important variation on the component.
+
+The stories are there to both demonstrate what the component looks like, and to document edge cases where components may behave differntly or historically had a bug.
+
+Each story has a number of panels that require your attention.
+
+1. Accessibility Panel
+   - In this panel you will find test cases implemented by a11y for testing the components and ensuring they pass minimum requirements of a11y. This should not be considered to mean that a fully passing component is 100% accessible, as that requires manual verification. This only checks for minimum failing states.
+2. Tests Panel
+   - In this panel you will find tests implemented by the developers of the component being showcased. If its empty, consider running `npm run test:generate-output` concurrently with storybook.
+3. Controls Panel
+   - In this panel you will find a series of inputs for configuring the props used by the component.
+   - The intent is to allow you to change the props the story comes with to observe how the props affect the component's behavior.
+   - Here you will also find a list of events that you can bind to when consuming this component.
+4. Actions Panel
+   - In this panel, you will find a list of events and their payloads that are fired by the component as you interact with it in the story.
+   - Events like `@input`, `@blur`, etc. will appear here.
+5. Docs Panel
+   - In this panel you will find documentation for the component and the stories.
+   - Each story will appear in a small contained sandbox. You can view the code that was used to implement the story and copy the code.
+     - Note that the code may not transfer one to one. For example, functions included in the source code will need to be extracted into the `methods` scope of your consuming Vue component.
+   - You will also find a table of `props`, `events` and `slots`.
+     - `Props` will have descriptions of what they are intended to do, as well as the expected type of the passed in value, the default value if one exists, as well as a red asterisk on props that are required.
+     - `Slots` will have descriptions of what they are intended to be used for, and the name of the slot will be included so you can target it with a `v-slot` directive.
+     - `Events` will also be present, however without descriptions. You can target each event with `@<eventName>` listeners.
+
+More complicated components may also have a `Usage` story which provides a fully working example of a consuming component that utilizes the component the story is for.
+
+## How you should use StorybookJS as a framework with your own development.
+
+Storybook is meant to be a self-documenting frontend development sandbox. Towards that end, its generally good practice for more complicated projects to have a project-specific storybook instance where you develop your project-specific components inside and then import them into your frontend.
+
+You can then have your own project-specific storybook, as well as this one open to use as documentation while you're implementing your project.
+
+At the end of your project, you can consider what components you have implemented that potentially have reuseability for other projects, and extrac the stories and source code for those components and insert them into this Storybook, which is the canonical central storybook for NASIC UI components.
+
+## Theme
+
+While each component imports the necessary styling to style themselves, components that rely on other components have
+no way to import the styling themselves when used in a tree-shakeable manner. So the ThemeProvider imports all the styling
+for every component so that if you want to only select a few components, you can just import the ThemeProvider and those
+components. If you want to avoid importing the ThemeProvider, then you'll need to import each of the dependent components
+as well as the component you intend to use. As an example:
+
+`IFCAlert` uses IFCInput and IFCButton. If you import `IFCAlert` alone, it will style itself correctly, but the `IFCInput`s and
+`IFCButton`s will be unstyled. You can choose to manually import those as well, but its easier to just import `IFCAlert` and the
+`IFCThemeProvider`.
+
+When implementing your own components, be sure to include their SCSS in the `ThemeProvider/theme.scss` to support them.
+
+More information is available in the <a href="/story/theming-usage--page">Theming Documentation</a>

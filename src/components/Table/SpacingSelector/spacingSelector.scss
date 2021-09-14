@@ -1,0 +1,56 @@
+@use '../../_constants.scss' as constants;
+@use '../../_stacking.scss' as stacking;
+@use '../../_colors.scss' as colors;
+
+.IFCSpacingSelector {
+  $g: &;
+  transition: clip-path .25s ease-out;
+  position: relative;
+  display: inline-block;
+  clip-path: circle(20px);
+  z-index: stacking.$SpacingSelectorZIndex;
+  
+
+  &__dropdown {
+    @include colors.themed() {
+      position: absolute;
+      top: 0;
+      right: 0;
+      z-index: stacking.$BuriedContentZIndex;
+      padding: 2.5em 1em 1em 1em;
+      border-radius: constants.$DefaultBorderRadius;
+      width: 150px;
+      border-top-right-radius: 20px;
+      display: flex;
+      @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+        display: none;
+      }
+      flex-direction: column;
+      button + button {
+        margin-top: .5em;
+      }
+      box-shadow: 0px 2px 4px 2px colors.retrieveColor('spacingSelector-boxShadow');
+      border: 1px solid colors.retrieveColor('info');
+      background-color: colors.retrieveColor('background');
+    }
+  }
+
+  &__button {
+    z-index: stacking.$SpacingSelectorZIndex;
+    & svg {
+      pointer-events: none;
+    }
+    &--toggled {
+      z-index: stacking.$BuriedContentZIndex;
+
+    }
+  }
+  &--toggled {
+    clip-path: circle(300px);
+    @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+      #{$g}__dropdown {
+        display: flex;
+      }
+    }
+  }
+}

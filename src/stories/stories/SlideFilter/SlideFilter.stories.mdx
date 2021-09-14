@@ -1,0 +1,53 @@
+import { Meta, ArgsTable, SourceContainer } from "@storybook/addon-docs/blocks";
+
+<Meta title="Container/Slide Filter/Usage" />
+
+# Slide Filter Usage
+
+**Note**: This component does _not_ work in IE 11!
+
+```html
+<template>
+  <IFCThemeProvider :dark="false">
+    <IFCSlideFilter
+      :min="0"
+      :max="100"
+      :lowerValue="lowerValue"
+      :upperValue="upperValue"
+      name="NumericFilter"
+      @input="handleInput"
+    >
+      <template v-slot:label>
+        Numeric Filter Label
+      </template>
+    </IFCSlideFilter>
+  </IFCThemeProvider>
+</template>
+
+<script>
+  import {
+    IFCSlideFilter,
+    IFCThemeProvider,
+  } from "@nasic/component-library/build/index.esm";
+
+  export default {
+    data() {
+      return {
+        lowerValue: 1,
+        upperValue: 99,
+      };
+    },
+    components: {
+      IFCSlideFilter,
+      IFCThemeProvider,
+    },
+    methods: {
+      handleInput(event) {
+        const { lowerValue, upperValue } = event;
+        this.lowerValue = lowerValue;
+        this.upperValue = upperValue;
+      },
+    },
+  };
+</script>
+```

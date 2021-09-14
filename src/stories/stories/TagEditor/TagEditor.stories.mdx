@@ -1,0 +1,41 @@
+import { Meta, ArgsTable, SourceContainer } from '@storybook/addon-docs/blocks';
+
+<Meta title="Container Components/Form Components/Tag Editor/Usage" />
+
+# Textarea Usage
+
+```html
+<template>
+  <IFCThemeProvider :dark="false">
+    <IFCTagEditor :value="value" name="MyTags" @change="handleChange">
+      <template #label>
+        My Custom Tag Editor
+      </template>
+    </IFCTagEditor>
+  </IFCThemeProvider>
+</template>
+
+<script>
+import {
+  IFCTagEditor, IFCThemeProvider,
+} from '@nasic/component-library/build/index.esm';
+
+export default {
+  data() {
+    return {
+      value: [],
+    };
+  },
+  components: {
+    IFCTagEditor,
+    IFCThemeProvider,
+  },
+  methods: {
+    handleChange(value) {
+      this.value = value;
+    },
+  },
+};
+</script>
+
+```

@@ -1,0 +1,31 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@Components/*": [
+        "src/components/*"
+      ],
+      "@Assets/*": [
+        "src/assets/*"
+      ],
+      "@Views/*": [
+        "src/views/*"
+      ],
+      "@App/*": [
+        "src/*"
+      ],
+      "@Project/*": [
+        "./*"
+      ]
+    }
+  },
+  "exclude": [
+    "node_modules"
+  ],
+  // "include": [
+  //   "./**/*.js",
+  //   "./**/*.vue",
+  //   "./**/*.mdx",
+  //   "./**/*.json",
+  // ]
+}

@@ -1,0 +1,26 @@
+@use '../_constants' as constants;
+@use './_buttonConstants.scss' as buttonConstants;
+
+.IFCButtonGroup {
+  display: flex;
+  &--block {
+    width: 100%;
+    & button {
+      flex: 1;
+      width: 100%;
+    }
+  }
+  button.#{buttonConstants.$ButtonClassName} {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+  button.#{buttonConstants.$ButtonClassName}:last-of-type {
+    border-top-right-radius: buttonConstants.$ButtonBorderRadius;
+    border-bottom-right-radius: buttonConstants.$ButtonBorderRadius;
+  }
+  button.#{buttonConstants.$ButtonClassName} + button.#{buttonConstants.$ButtonClassName} {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    margin-left: -#{constants.$DefaultBorderWidth};
+  }
+}

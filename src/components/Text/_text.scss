@@ -1,0 +1,168 @@
+@use './_textConstants.scss' as text;
+@use '../_colors.scss' as colors;
+
+// the reason that this file is a partial is that if we were to import this file traditionally for each text component
+// we would duplicate each class 8 times. So instead we do a @use import to stop duplication.
+@mixin H1 {
+  .IFCH1 {
+    @include text.DefaultFont;
+    @include colors.themed() {
+      color: colors.retrieveColor("text-normal");
+    }
+    margin-bottom: 0.5em;
+    &--bold {
+      @include text.BoldFont;
+    }
+    &--marginless {
+      margin: 0;
+    }
+  }
+}
+
+@mixin H2 {
+  .IFCH2 {
+    @include text.DefaultFont;
+    @include colors.themed() {
+      color: colors.retrieveColor("text-normal");
+    }
+    margin-bottom: 0.5em;
+    &--bold {
+      @include text.BoldFont;
+    }
+    &--marginless {
+      margin: 0;
+    }
+  }
+}
+
+@mixin H3 {
+  .IFCH3 {
+    @include text.DefaultFont;
+    @include colors.themed() {
+      color: colors.retrieveColor("text-normal");
+    }
+    margin-bottom: 0.5em;
+    &--bold {
+      @include text.BoldFont;
+    }
+    &--marginless {
+      margin: 0;
+    }
+  }
+}
+
+@mixin H4 {
+  .IFCH4 {
+    @include text.DefaultFont;
+    @include colors.themed() {
+      color: colors.retrieveColor("text-normal");
+    }
+    margin-bottom: 0.5em;
+    &--bold {
+      @include text.BoldFont;
+    }
+    &--marginless {
+      margin: 0;
+    }
+  }
+}
+
+@mixin H5 {
+  .IFCH5 {
+    @include text.DefaultFont;
+    @include colors.themed() {
+      color: colors.retrieveColor("text-normal");
+    }
+    margin-bottom: 0.5em;
+    &--bold {
+      @include text.BoldFont;
+    }
+    &--marginless {
+      margin: 0;
+    }
+  }
+}
+
+@mixin H6 {
+  .IFCH6 {
+    @include text.DefaultFont;
+    @include colors.themed() {
+      color: colors.retrieveColor("text-normal");
+    }
+    margin-bottom: 0.5em;
+    &--bold {
+      @include text.BoldFont;
+    }
+    &--marginless {
+      margin: 0;
+    }
+  }
+}
+
+@mixin Label {
+  .IFCLabel {
+    @include text.DefaultTextStyling;
+    @include colors.themed() {
+      color: colors.retrieveColor("text-normal");
+    }
+    &--bold {
+      @include text.BoldFont;
+    }
+  }
+}
+
+@mixin Paragraph {
+  .IFCParagraph {
+    @include text.DefaultTextStyling;
+    @include colors.themed() {
+      color: colors.retrieveColor("text-normal");
+    }
+    &--bold {
+      @include text.BoldFont;
+    }
+    &--marginless {
+      margin: 0;
+    }
+  }
+}
+
+@mixin ScreenReader {
+  .IFCScreenReaderText {
+    @include text.ScreenReaderOnlyStyling;
+    &--shown {
+      @include text.DefaultTextStyling;
+      position: relative;
+      width: initial;
+      height: initial;
+      margin: initial;
+      overflow: visible;
+      clip: unset;
+      border: unset;
+      padding: 0.5em 1em;
+    }
+  }
+}
+
+@mixin Small {
+  .IFCSmall {
+    @include text.DefaultFont;
+    @include colors.themed() {
+      color: colors.retrieveColor("text-normal");
+    }
+    &--bold {
+      @include text.BoldFont;
+    }
+  }
+}
+
+@mixin Span {
+  .IFCSpan {
+    @include text.DefaultTextStyling;
+    @include colors.themed() {
+      color: colors.retrieveColor("text-normal");
+    }
+    &--bold {
+      @include text.BoldFont;
+    }
+  }
+}

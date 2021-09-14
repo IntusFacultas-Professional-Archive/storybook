@@ -1,0 +1,27 @@
+.IFCTableSortable {
+  border: 0;
+  background-color: transparent;
+  cursor: pointer;
+  padding: .15em .15em 0 .15em;
+  & svg {
+    transition: transform .15s ease-out, opacity .3s ease-out;
+    opacity: .5;
+    fill: currentColor;
+    transform: rotate(0deg);
+  }
+  &:hover {
+    & svg {
+      opacity: 1.0
+    }
+  }
+  &--activated {
+    & svg {
+      opacity: 1;
+    }
+  }
+  &--ascending {
+    & svg {
+      transform: rotate(180deg);
+    }
+  }
+}

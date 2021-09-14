@@ -1,0 +1,173 @@
+@use '../Text/_textConstants' as text;
+@use '../_constants.scss' as constants;
+@use '../_colors.scss' as colors;
+@use '../Input/_inputConstants.scss' as input;
+
+@mixin XImage {
+  @include colors.themed() {
+    fill: colors.retrieveColor('text-normal');
+  }
+  height:14px;
+  width: 14px;
+  margin-left: 2px;
+}
+
+.IFCTreeQueryBuilder {
+  &__ButtonGroup {
+    margin-top: .5em;
+  }
+}
+
+
+.IFCTreeQueryBuilderExpression {
+  padding: 1em;
+  @include colors.themed() {
+    border: 1px solid adjust-color($color: colors.retrieveColor('text-normal'), $alpha: -.6);
+    background-color: colors.retrieveColor('background');
+  }
+  border-radius: 5px;
+  display: flex;
+  flex: 1;
+  flex-direction: row !important;
+  flex-wrap: nowrap;
+  align-items: center;
+
+  &--error {
+    @include colors.themed() {
+      background-color: colors.retrieveColor('tree-query-builder-error');
+    }
+  }
+
+  &__x {
+    @include XImage;
+  }
+  & textarea {
+    min-height: 35px;
+    height: 35px;
+  }
+  & > span {
+    margin-right: 0.5em;
+  }
+  & select {
+    flex: 2;
+    height: input.$InputHeight;
+    padding: input.$InputVerticalPadding input.$InputHorizontalPadding;
+    box-sizing: border-box;
+    border-radius: 0;
+    border-style: constants.$DefaultBorderStyle;
+    border-width: 2px;
+    @include text.DefaultTextStyling;
+    @include colors.themed() {
+      border-color: colors.retrieveColor('border');
+      color: colors.retrieveColor('text-normal');
+    }
+    background-color: transparent;
+  }
+  & > div {
+    margin: 0 0.2em;
+    flex: 2;
+  }
+  & > div:nth-of-type(3) {
+    flex: 2;
+  }
+  & > div:last-of-type {
+    flex: 2;
+  }
+}
+
+
+.IFCTreeQueryBuilderTree {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  position: relative;
+  padding: 1em;
+  @include colors.themed() {
+    background-color: colors.retrieveColor('background');
+  }
+  &--error {
+    @include colors.themed() {
+      background-color: colors.retrieveColor('tree-query-builder-error');
+    }
+  }
+  &__ButtonGroup {
+    margin-top: .5em;
+  }
+  &__ExpressionContainer {
+    flex: 1;
+    display: flex;
+    flex-direction: column;;
+  }
+  &__Children {
+    display: flex;
+  }
+  &__Children, &__ConstructorButtons {
+    width: 100%;
+  }
+  &__brackets {
+    width: 5px;
+    height: 100%;
+    margin-right: 5px;
+    position: relative;
+    @include colors.themed() {
+      border-color: colors.retrieveColor('text-normal');
+    }
+    border-style: solid;
+    border-left-width: 1px;
+    border-top-width: 1px;
+    border-bottom-width: 1px;
+    border-right-width: 0px;
+    &::before {
+      content: " ";
+      height: 1px;
+      position: absolute;
+      display: block;
+      width: 10px;
+      @include colors.themed() {
+        border-bottom: 1px solid colors.retrieveColor('text-normal');
+      }
+      right:100%;
+      top: 50%;
+    }
+    &--right {
+      margin-left: 1em;
+      margin-right: 0;
+      border-right-width: 1px;
+      border-left-width: 0px;
+
+      &::before {
+        content: "";
+        display: none;
+      }
+    }
+  }
+  &__NestedExpressions {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    /* this is stupid but hey ho */
+    .IFCTreeQueryBuilderTreeContainer + .IFCTreeQueryBuilderExpression {
+      margin-top: .5em;
+    }
+    .IFCTreeQueryBuilderExpression + .IFCTreeQueryBuilderTreeContainer {
+      margin-top: .5em;
+    }
+    .IFCTreeQueryBuilderTreeContainer + .IFCTreeQueryBuilderTreeContainer {
+      margin-top: .5em;
+    }
+    .IFCTreeQueryBuilderExpression + .IFCTreeQueryBuilderExpression {
+      margin-top: .5em;
+    }
+  }
+  &__x {
+    @include XImage;
+  }
+  & > span {
+    margin-right: 1em;
+  }
+}
+.IFCTreeQueryBuilderTreeContainer {
+  display: flex;
+  width: 100%;
+  flex: 1;
+}
