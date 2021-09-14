@@ -8,7 +8,7 @@ import { IFCThemeProvider } from '@Components/ThemeProvider/IFCThemeProvider.vue
 import { action } from '@storybook/addon-actions';
 
 export default {
-  title: 'Container/Slide Filter',
+  title: 'Container Components/Slide Filter',
   component: IFCSlideFilter,
   parameters: {
     jest: ['IFCSlider.spec.js'],
