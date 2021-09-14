@@ -8,6 +8,12 @@ export default {
     jest: [],
   },
   argTypes: {
+    dark: {
+      control: {
+        type: 'boolean',
+        default: false,
+      },
+    },
     href: {
       control: {
         type: 'text',

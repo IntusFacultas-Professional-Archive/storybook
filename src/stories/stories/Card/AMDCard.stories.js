@@ -16,6 +16,12 @@ export default {
     },
   },
   argTypes: {
+    dark: {
+      control: {
+        type: 'boolean',
+        default: false,
+      },
+    },
     title: {
       /**
        * Disabled because the description needs to be one line

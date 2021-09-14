@@ -14,6 +14,12 @@ export default {
     jest: ['IFCParagraph.spec.js'],
   },
   argTypes: {
+    dark: {
+      control: {
+        type: 'boolean',
+        default: false,
+      },
+    },
   },
 };
 

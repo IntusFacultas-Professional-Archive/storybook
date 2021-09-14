@@ -17,6 +17,12 @@ export default {
     jest: ['IFCAccordion.spec.js'],
   },
   argTypes: {
+    dark: {
+      control: {
+        type: 'boolean',
+        default: false,
+      },
+    },
   },
 };
 

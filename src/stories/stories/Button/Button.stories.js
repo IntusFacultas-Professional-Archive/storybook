@@ -17,6 +17,12 @@ export default {
     jest: ['IFCButton.spec.js'],
   },
   argTypes: {
+    dark: {
+      control: {
+        type: 'boolean',
+        default: false,
+      },
+    },
     size: {
       control: {
         type: 'select',

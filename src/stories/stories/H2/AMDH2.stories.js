@@ -8,6 +8,12 @@ export default {
     jest: ['IFCH2.spec.js'],
   },
   argTypes: {
+    dark: {
+      control: {
+        type: 'boolean',
+        default: false,
+      },
+    },
   },
 };
 

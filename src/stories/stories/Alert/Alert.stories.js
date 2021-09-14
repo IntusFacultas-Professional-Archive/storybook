@@ -18,6 +18,12 @@ export default {
     jest: ['IFCAlert.spec.js'],
   },
   argTypes: {
+    dark: {
+      control: {
+        type: 'boolean',
+        default: false,
+      },
+    },
   },
 };
 const EXCLUDED_KEYS = ['alertTemplate', 'dark'];

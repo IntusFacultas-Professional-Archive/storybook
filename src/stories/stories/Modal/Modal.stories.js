@@ -19,6 +19,12 @@ export default {
     jest: [],
   },
   argTypes: {
+    dark: {
+      control: {
+        type: 'boolean',
+        default: false,
+      },
+    },
   },
 };
 
