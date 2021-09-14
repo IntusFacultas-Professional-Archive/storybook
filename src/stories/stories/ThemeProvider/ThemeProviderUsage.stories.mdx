@@ -101,9 +101,7 @@ When you're developing your components, I'd recommend keeping several things in 
 ```
 
 2. Don't write SCSS inside of the `<style>` tag in your Vue SFC unless you intend for it only to be loaded if the
-   component itself is loaded directly by the developer consuming this library. (there are valid reasons to do this.
-   For example, the NASIC Link Navbar adds a margin to the body in IE when the component is loaded, but it doesn't make
-   sense to have that margin present when the LINK Navbar isn't present to fill that margin, so that exists only in the `<style>` tag.)
+   component itself is loaded directly by the developer consuming this library.
 
 Instead you should write a separate `MyComponent.scss` file which you can then `@import` into your Vue SFC `<style>`
 area. The reason you should do this is because you'll also want to import your scss file in the `ThemeProvider/theme.scss`
