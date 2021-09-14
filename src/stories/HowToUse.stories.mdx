@@ -14,15 +14,10 @@ build: {
       '@intusfacultas/component-library',
       'vue-runtime-helpers/dist/inject-style/server.mjs',
     ],
-    vendor: [
-      'vue-svg-pan-zoom'
-    ]
   }
 ```
 
-2. Include this script in the `<head>` of your template HTML file which can be found in `.nuxt/views/app.template.html`.
-
-For JWICS and SIPR you'll need to download the file and include it locally. This polyfills CSS vars for IE11.
+2. In order to support IE11, You'll need to include this script in the `<head>` of your template HTML file which can be found in `.nuxt/views/app.template.html`.
 
 ```html
 <script>
