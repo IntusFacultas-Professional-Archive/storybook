@@ -156,8 +156,6 @@ const Template = (args, { argTypes }) => ({
   components: {
     IFCTable,
     IFCThemeProvider,
-    IFCParametricFilter,
-    IFCNumericFilter,
     IFCForm,
     IFCParagraph,
     IFCH1,
