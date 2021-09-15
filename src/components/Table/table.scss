@@ -17,7 +17,7 @@ $relaxed: 0.75em;
 }
 
 @mixin VisualBugFix {
-  & > div > span, & > div.IFCtablecell--externalcontent {
+  & div.IFCTableCell--externalcontent {
     /** this is incredibly hacky, but its 05:00 and I've been working on this since 06:00 of yesterday without
     success. The cells have to have a right padding of 0 so that the resize handle is appropriately situated
     at the corner, but we want to have visual space similar to the padding, particularly for right-aligned cells
@@ -98,6 +98,7 @@ $BorderManagerClassName: 'IFCTableBorderManager';
 }
 
 @mixin CellVariants($cellOrHeader) {
+
   // sizing variants
   &--condensed {
     padding: .5em 0em $condensed $horizontalClearance;

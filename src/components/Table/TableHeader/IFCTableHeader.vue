@@ -16,7 +16,7 @@
         :sortDirection="activelySorted ? sortDirection : 'descending'"
         :activated="activelySorted" />
     </div>
-    <div class="IFCtablecell--externalcontent">
+    <div class="IFCTableCell--externalcontent">
       <slot name="external-content"></slot>
     </div>
   </th>

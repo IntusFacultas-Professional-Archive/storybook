@@ -136,6 +136,9 @@ export const cellMixin = {
     resizeable(newVal) {
       if (!this.observer && newVal) {
         this.setupObserver();
+      } else if (this.observer !== null && !newVal) {
+        this.observer.disconnect();
+        this.observer = null;
       }
     },
   },

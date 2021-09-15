@@ -10,7 +10,7 @@
         <slot></slot>
       </button>
     </div>
-    <div class='IFCtablecell--externalcontent'>
+    <div class='IFCTableCell--externalcontent'>
       <slot name="external-content"></slot>
     </div>
   </td>
